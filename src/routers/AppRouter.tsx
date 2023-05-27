@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import SimulatorPage from "../pages/simulator/SimulatorPage";
 import EditorPage from "../pages/simulator/pages/editor/EditorPage";
-import DissasemblyPage from "../pages/simulator/pages/dissasembly/DissasemblyPage";
+import DissasemblerPage from "../pages/simulator/pages/dissasembler/DissasemblerPage";
 import DatapathPage from "../pages/simulator/pages/datapath/DatapathPage";
 
 export const AppRouter = createBrowserRouter([
@@ -15,7 +15,7 @@ export const AppRouter = createBrowserRouter([
       },
       {
         path: "dissasembly",
-        element: <DissasemblyPage />,
+        element: <DissasemblerPage />,
       },
       {
         path: "datapath",
