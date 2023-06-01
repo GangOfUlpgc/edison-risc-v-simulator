@@ -5,7 +5,7 @@ import { Box } from "@chakra-ui/layout";
 export default function EditorPage() {
   return (
     <Box py="1rem" height="100%">
-      <Editor width="100%" height="100%" defaultLanguage="javascript" />
+      <Editor width="100%" height="100%" language="mips" />
     </Box>
   );
 }
