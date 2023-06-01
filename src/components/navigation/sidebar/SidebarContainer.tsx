@@ -8,9 +8,9 @@ interface props {
 
 export default function SidebarContainer({ children }: props) {
   return (
-    <Box height="100vh">
+    <Box height="100%" display="flex" overflow="hidden">
       <Sidebar></Sidebar>
-      <Box pt="4rem" ml="4.5rem" height="100%">
+      <Box height="100%" overflow="auto" padding="2rem" width="100%">
         {children}
       </Box>
     </Box>
