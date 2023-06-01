@@ -1,12 +1,11 @@
+import React from "react";
 import { Box } from "@chakra-ui/react";
 import {
-  VscFolder,
   VscDebugAlt,
   VscSettingsGear,
   VscSearch,
   VscFiles,
 } from "react-icons/vsc";
-import React from "react";
 import SidebarElement from "./SidebarElement";
 
 export function Sidebar() {

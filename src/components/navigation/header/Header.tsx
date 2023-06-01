@@ -1,6 +1,5 @@
-import { Box, Text } from "@chakra-ui/react";
 import React from "react";
-import HeaderContainer from "./HeaderContainer";
+import { Box, Text } from "@chakra-ui/react";
 import HeaderControl from "./HeaderControl";
 
 export default function Header() {
