@@ -5,9 +5,10 @@ interface props {
   name: string;
   children: React.ReactNode;
   active?: boolean;
+  onClick: () => void;
 }
 
-export default function SidebarElement({ children, active, name }: props) {
+export default function SidebarElement({ children, active, name, onClick }: props) {
   return (
     <Tooltip label={name} placement="right">
       <Box
@@ -22,6 +23,7 @@ export default function SidebarElement({ children, active, name }: props) {
         cursor="pointer"
         _hover={{ textColor: "gray.800" }}
         fontSize="3xl"
+        onClick={onClick}
       >
         {active && (
           <Box
