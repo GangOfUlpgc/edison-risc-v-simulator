@@ -4,12 +4,15 @@ import SidebarContainer from "../../components/navigation/sidebar/SidebarContain
 import { Sidebar } from "../../components/navigation/sidebar/Sidebar";
 import HeaderContainer from "../../components/navigation/header/HeaderContainer";
 import Header from "../../components/navigation/header/Header";
+import { Box } from "@chakra-ui/layout";
 
 export default function SimulatorPage() {
   return (
     <HeaderContainer>
       <SidebarContainer>
-        <Outlet></Outlet>
+        <Box height="100%">
+          <Outlet></Outlet>
+        </Box>
       </SidebarContainer>
     </HeaderContainer>
   );
