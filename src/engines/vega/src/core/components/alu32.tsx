@@ -26,14 +26,14 @@ export class Alu32 extends DatapathComponent {
     super(inputs);
   }
 
-  public execute(): string {
+  public execute() {
     const input1 = this.inputs[0].execute();
     const input2 = this.inputs[1].execute();
     const op = this.inputs[2].execute();
 
-    const operation = this.operations[op];
+    const operation = this.operations[op[0]];
     const operationFunction = this.operationFunctions[operation];
 
-    return operationFunction(input1, input2);
+    return [operationFunction(input1[0], input2[0])];
   }
 }

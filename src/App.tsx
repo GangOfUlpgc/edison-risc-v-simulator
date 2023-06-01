@@ -4,21 +4,17 @@ import { Constant } from "./engines/vega/src/core/components/constant";
 import { Register } from "./engines/vega/src/core/components/register";
 import { Alu32 } from "./engines/vega/src/core/components/alu32";
 
-const alu1 = new Alu32([
-  new Constant("0"),
-  new Constant("1"),
-  new Constant("010"),
-]);
+let pc = "0";
+for (let ins = 0; ins < 10; ins++) {
+  const alu3 = new Alu32([
+    new Constant(pc),
+    new Constant("100"),
+    new Constant("010"),
+  ]);
 
-const alu2 = new Alu32([
-  new Constant("0"),
-  new Constant("1"),
-  new Constant("010"),
-]);
-
-const alu3 = new Alu32([alu1, alu2, new Constant("010")]);
-
-console.log(alu3.execute());
+  pc = alu3.execute()[0];
+  console.log(pc);
+}
 
 function App() {
   return <RouterProvider router={AppRouter}></RouterProvider>;

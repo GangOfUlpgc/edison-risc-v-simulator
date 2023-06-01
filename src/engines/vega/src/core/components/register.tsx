@@ -1,7 +1,7 @@
 import { DatapathComponent } from "./base";
 
 export class Register extends DatapathComponent {
-  public state: { [value: string]: string } = {
+  public state: { [index: string]: string } = {
     "0000": "00000000000000000000000000000000", // Register 0
     "0001": "00000000000000000000000000000000", // Register 1
     "0010": "00000000000000000000000000000000", // Register 2
@@ -17,20 +17,20 @@ export class Register extends DatapathComponent {
     this.state = state;
   }
 
-  public execute(): string {
+  public execute(): string[] {
     const select = this.inputs[2].execute();
     const address = this.inputs[0].execute();
     const writeValue = this.inputs[1].execute();
 
-    if (select === "0") {
+    if (select[0] === "0") {
       // Read operation
-      return this.state[address];
-    } else if (select === "1") {
+      return [this.state[address[0]]];
+    } else if (select[0] === "1") {
       // Write operation
-      this.state[address] = writeValue;
+      this.state[address[0]] = writeValue[0];
       return writeValue;
     }
 
-    return "00000000000000000000000000000000"; // Default return value
+    return ["00000000000000000000000000000000"]; // Default return value
   }
 }
