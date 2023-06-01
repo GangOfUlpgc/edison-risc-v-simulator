@@ -1,0 +1,32 @@
+# This is Vega engine
+
+Vega engine is a RISC-V emulator written in typescript for RCV32I instruction set. Its made for educational purposes and is not intended to be used in production. It is not fully compliant with RISC-V specification, but it can run some simple programs. Also emulates pipelined CPU with 4 stages: fetch, decode, execute, writeback.
+
+## Features
+
+- [x] RCV32I instruction set
+- [x] 4 stage pipelined CPU
+- [x] 32 registers
+- [x] 4KB memory
+
+## Usage
+
+To run the emulator you need to have nodejs installed on your machine. You can install it from [here](https://nodejs.org/en/).
+To add vega engine to your project you need to install it from npm:
+
+```bash
+npm install @riscv/vega
+```
+
+Then you can import it in your project:
+
+```javascript
+import { Vega } from "@riscv/vega";
+```
+
+To run the emulator you need to create an instance of Vega class use the run method passing the path to the binary file as an argument:
+
+```javascript
+const vega = new Vega();
+vega.run("path/to/binary/file");
+```
