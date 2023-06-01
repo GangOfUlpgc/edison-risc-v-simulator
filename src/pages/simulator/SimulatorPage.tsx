@@ -5,14 +5,13 @@ import { Sidebar } from "../../components/navigation/sidebar/Sidebar";
 import HeaderContainer from "../../components/navigation/header/HeaderContainer";
 import Header from "../../components/navigation/header/Header";
 import { Box } from "@chakra-ui/layout";
+import SidebarWindow from "../../components/navigation/sidebar/SidebarWindow";
 
 export default function SimulatorPage() {
   return (
     <HeaderContainer>
       <SidebarContainer>
-        <Box height="100%">
-          <Outlet></Outlet>
-        </Box>
+        <Outlet></Outlet>
       </SidebarContainer>
     </HeaderContainer>
   );
