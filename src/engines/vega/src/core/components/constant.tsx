@@ -7,7 +7,7 @@ export class Constant extends DatapathComponent {
     this.value = value;
   }
 
-  public execute(): string {
-    return this.value;
+  public execute(): string[] {
+    return [this.value];
   }
 }

@@ -5,12 +5,12 @@ export class Multiplexor extends DatapathComponent {
     super(inputs);
   }
 
-  public execute(): string {
+  public execute(): string[] {
     const input1 = this.inputs[0].execute();
     const input2 = this.inputs[1].execute();
     const control = this.inputs[2].execute();
 
-    if (control === "0") {
+    if (control[0] === "0") {
       return input1;
     } else {
       return input2;

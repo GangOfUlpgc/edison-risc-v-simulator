@@ -8,6 +8,7 @@ export class DatapathComponent {
   public setInputs(inputs: DatapathComponent[]) {
     this.inputs = inputs;
   }
+
   public execute(): string {
     console.log("implement this method");
     return "0";
