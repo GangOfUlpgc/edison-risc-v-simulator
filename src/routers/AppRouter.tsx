@@ -10,7 +10,7 @@ export const AppRouter = createBrowserRouter([
     element: <SimulatorPage />,
     children: [
       {
-        path: "editor",
+        index: true,
         element: <EditorPage />,
       },
       {
