@@ -8,7 +8,7 @@ interface props {
 export function Element({ children }: props) {
   return (
     <Box
-      textColor="gray.800"
+      textColor="gray.500"
       display="flex"
       alignItems="center"
       justifyContent="center"
@@ -16,7 +16,7 @@ export function Element({ children }: props) {
       width="1.9rem"
       height="1.9rem"
       cursor="pointer"
-      _hover={{ bgColor: "gray.300" }}
+      _hover={{ bgColor: "gray.300", textColor: "gray.600" }}
     >
       {children}
     </Box>

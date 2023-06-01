@@ -6,7 +6,10 @@ import HeaderControl from "./HeaderControl";
 export default function Header() {
   return (
     <Box
-      py="0.7rem"
+      position="fixed"
+      zIndex="10"
+      w="100%"
+      h="4rem"
       bgColor="gray.100"
       display="flex"
       justifyContent="space-between"
