@@ -10,7 +10,9 @@ export default function SidebarContainer({ children }: props) {
   return (
     <Box>
       <Sidebar></Sidebar>
-      <Box>{children}</Box>
+      <Box pt="4rem" ml="5rem">
+        {children}
+      </Box>
     </Box>
   );
 }
