@@ -1,17 +1,26 @@
 import { Box, Tooltip } from "@chakra-ui/react";
 import React from "react";
+import { useUI } from "../../../storage/ui.storage";
 
 interface props {
   name: string;
+  slug: string;
   children: React.ReactNode;
-  active?: boolean;
-  onClick: () => void;
 }
 
-export default function SidebarElement({ children, active, name, onClick }: props) {
+export default function SidebarElement({ children, slug, name }: props) {
+  const ui = useUI((state) => state);
+  const active = ui.sidebarWindow === slug;
+
+  function onClick() {
+    if (active) ui.setSidebarWindow(null);
+    else ui.setSidebarWindow(slug);
+  }
+
   return (
     <Tooltip label={name} placement="right">
       <Box
+        onClick={onClick}
         position="relative"
         w="100%"
         textColor={active ? "gray.800" : "gray.500"}
@@ -23,7 +32,6 @@ export default function SidebarElement({ children, active, name, onClick }: prop
         cursor="pointer"
         _hover={{ textColor: "gray.800" }}
         fontSize="3xl"
-        onClick={onClick}
       >
         {active && (
           <Box
@@ -34,7 +42,7 @@ export default function SidebarElement({ children, active, name, onClick }: prop
             display="flex"
             alignItems="center"
           >
-            <Box w="2px" h="3rem" bgColor="#F7B217" position="absolute" />
+            <Box w="3px" h="3rem" bgColor="#F7B217" position="absolute" />
           </Box>
         )}
         {children}

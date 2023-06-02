@@ -15,7 +15,7 @@ export default function Header() {
       alignItems="center"
       px="2rem"
       borderBottom="2px"
-      borderBottomColor="gray.200"
+      borderBottomColor="gray.300"
     >
       {/* This is for the logo */}
       <Box>

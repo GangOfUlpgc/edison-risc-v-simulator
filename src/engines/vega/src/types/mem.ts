@@ -1,5 +1,5 @@
-type Address = number;
+export type Address = number;
 
-type Memory = {
+export type Memory = {
   [address: number]: number;
 };

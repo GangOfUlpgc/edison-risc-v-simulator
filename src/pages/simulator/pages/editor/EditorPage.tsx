@@ -1,11 +1,12 @@
 import React from "react";
-import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
 import { Box } from "@chakra-ui/layout";
+import { useFileStorage } from "../../../../storage/file.storage";
+import CodeEditor from "../../../../components/editor/CodeEditor";
 
 export default function EditorPage() {
-  return (
+  const isFileSelected = useFileStorage((state) => state.currentFile);
 
-    <Editor width="100%" height="100%" language="mips" />
+  if (!isFileSelected) return <Box>Select or create new file</Box>;
 
-  );
+  return <CodeEditor></CodeEditor>;
 }

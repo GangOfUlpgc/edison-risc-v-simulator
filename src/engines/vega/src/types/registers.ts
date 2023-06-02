@@ -32,10 +32,10 @@ type xNumber =
   | 30
   | 31;
 
-type Registers = {
+export type Registers = {
   [key in `x${xNumber}`]: number;
 };
 
-type RegisterBank = Registers & {
+export type RegisterBank = Registers & {
   pc: number;
 };
