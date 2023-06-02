@@ -1,26 +1,31 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { Formik } from "formik";
 import { useFileStorage } from "../../../../../storage/file.storage";
 import { Box, Input } from "@chakra-ui/react";
 import { VscFile } from "react-icons/vsc";
+import { useUI } from "../../../../../storage/ui.storage";
 
 export default function FileForm() {
   const addFile = useFileStorage((state) => state.addFile);
-  const [active, setActive] = React.useState(0);
+  const { addingFile, setAddingFile } = useUI();
   const ref = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (addingFile)
+      setTimeout(() => {
+        ref.current?.focus();
+      }, 100);
+  }, [addingFile]);
 
   return (
     <Box px="0.5rem" mt="0.4rem">
-      {!active ? (
+      {!addingFile ? (
         <Box
           color="gray.500"
           fontWeight="regular"
           cursor="pointer"
           onClick={() => {
-            setActive(1);
-            setTimeout(() => {
-              ref.current?.focus();
-            }, 100);
+            setAddingFile(true);
           }}
         >
           + Add file
@@ -30,7 +35,7 @@ export default function FileForm() {
           initialValues={{ name: "" }}
           onSubmit={(values) => {
             addFile(values.name);
-            setActive(0);
+            setAddingFile(false);
           }}
         >
           {({ values, handleChange, handleSubmit }) => (
@@ -45,11 +50,11 @@ export default function FileForm() {
               <Input
                 size="xs"
                 onBlur={() => {
-                  setActive(0);
+                  setAddingFile(false);
                 }}
                 ref={ref}
                 onKeyDown={(event) => {
-                  if (event.key === "Escape") setActive(0);
+                  if (event.key === "Escape") setAddingFile(false);
                   if (event.key === "Enter") handleSubmit();
                 }}
                 type="text"

@@ -11,6 +11,7 @@ import {
 } from "react-icons/fa";
 import { List } from "./List";
 import { Element } from "./Element";
+import { useUI } from "../../../../storage/ui.storage";
 
 function Separator() {
   return (
@@ -21,6 +22,8 @@ function Separator() {
 }
 
 export default function HeaderControl() {
+  const ui = useUI();
+
   return (
     <Box display="flex" gap="1rem">
       <List>
@@ -32,7 +35,7 @@ export default function HeaderControl() {
           <FaFileDownload></FaFileDownload>
         </Element>
         <Separator />
-        <Element>
+        <Element onClick={() => ui.setAddingFile(true)}>
           <FaFile></FaFile>
         </Element>
       </List>
