@@ -1,4 +1,9 @@
-import { createRegisterBank } from "./core/registers";
+import { ALU } from "./core/mem/alu";
+import { PCRegister } from "./core/mem/pc";
+import { RAM } from "./core/mem/ram";
+import { RegisterBank } from "./core/mem/registers";
+import { ROM } from "./core/mem/rom";
+import { CPUState } from "./core/state";
 
 /**
  * Vega engine
@@ -14,32 +19,72 @@ import { createRegisterBank } from "./core/registers";
  *
  */
 export default class Vega {
-  public registers: RegisterBank;
-  public memory: Memory = {};
+  rom = new ROM();
+  ram = new RAM();
+  alu = new ALU();
+  registers = new RegisterBank();
+  pc = new PCRegister();
 
-  constructor() {
-    this.registers = createRegisterBank();
+  loadRom(rom: number[]) {
+    this.rom.load(rom);
   }
 
-  private setPc(pc: number) {
-    this.registers.pc = pc;
+  next() {
+    this.fetch();
+    this.decode();
+    this.execute();
+    this.mem();
+    this.writeback();
   }
 
-  public load(assamblyCode: string) {
-    console.log("Vega load");
-  }
-
-  public run() {
-    console.log("Vega run");
-  }
-
-  public next() {
-    this.setPc(this.registers.pc + 0x4);
-    const instruction = this.memory[this.registers.pc];
+  fetch() {
+    const instruction = this.rom.read(this.pc.read());
+    this.pc.plus4();
     console.log(instruction);
+
+    CPUState.setState((state) => ({
+      ...state,
+      pipeline: {
+        ...state.pipeline,
+        ID: state.pipeline["IF"],
+        IF: instruction.toString(),
+      },
+      fetch: {
+        instruction: instruction.toString(),
+      },
+    }));
+    console.log("fetch");
   }
 
-  public prev() {
-    console.log("Vega prev");
+  decode() {
+    console.log("decode");
+    CPUState.setState((state) => ({
+      ...state,
+      pipeline: {
+        ...state.pipeline,
+        EX: state.pipeline["IF"],
+        IF: state.pipeline["ID"],
+      },
+    }));
+  }
+
+  execute() {
+    console.log("execute");
+    CPUState.setState((state) => ({
+      ...state,
+      pipeline: {
+        ...state.pipeline,
+        MEM: state.pipeline["IF"],
+        EX: state.pipeline["IF"],
+      },
+    }));
+  }
+
+  mem() {
+    console.log("mem");
+  }
+
+  writeback() {
+    console.log("writeback");
   }
 }
