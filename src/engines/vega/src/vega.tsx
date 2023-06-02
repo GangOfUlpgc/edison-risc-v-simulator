@@ -3,6 +3,7 @@ import { PCRegister } from "./core/mem/pc";
 import { RAM } from "./core/mem/ram";
 import { RegisterBank } from "./core/mem/registers";
 import { ROM } from "./core/mem/rom";
+import { CPUStateManager } from "./core/mem/state";
 import { CPUState } from "./core/state";
 
 /**
@@ -24,6 +25,7 @@ export default class Vega {
   alu = new ALU();
   registers = new RegisterBank();
   pc = new PCRegister();
+  manager = new CPUStateManager();
 
   loadRom(rom: number[]) {
     this.rom.load(rom);
@@ -37,47 +39,24 @@ export default class Vega {
     this.writeback();
   }
 
-  fetch() {
-    const instruction = this.rom.read(this.pc.read());
-    this.pc.plus4();
-    console.log(instruction);
+  reload() {
+    this.pc.write(0);
+    this.manager.reset();
+  }
 
-    CPUState.setState((state) => ({
-      ...state,
-      pipeline: {
-        ...state.pipeline,
-        ID: state.pipeline["IF"],
-        IF: instruction.toString(),
-      },
-      fetch: {
-        instruction: instruction.toString(),
-      },
-    }));
+  fetch() {
+    const instruction = this.rom.read(this.pc.read()) | 0;
+    this.pc.plus4();
+    this.manager.nextStep(instruction.toString());
     console.log("fetch");
   }
 
   decode() {
     console.log("decode");
-    CPUState.setState((state) => ({
-      ...state,
-      pipeline: {
-        ...state.pipeline,
-        EX: state.pipeline["IF"],
-        IF: state.pipeline["ID"],
-      },
-    }));
   }
 
   execute() {
     console.log("execute");
-    CPUState.setState((state) => ({
-      ...state,
-      pipeline: {
-        ...state.pipeline,
-        MEM: state.pipeline["IF"],
-        EX: state.pipeline["IF"],
-      },
-    }));
   }
 
   mem() {

@@ -8,6 +8,7 @@ import {
   FaFileDownload,
   FaFile,
   FaSave,
+  FaUndo,
 } from "react-icons/fa";
 import { List } from "./List";
 import { Element } from "./Element";
@@ -46,6 +47,9 @@ export default function HeaderControl() {
         </Element>
       </List>
       <List>
+        <Element onClick={() => cpu.reload()}>
+          <FaUndo />
+        </Element>
         <Element>
           <FaPlay />
         </Element>
