@@ -8,10 +8,12 @@ import {
   FaFileDownload,
   FaFile,
   FaSave,
+  FaUndo,
 } from "react-icons/fa";
 import { List } from "./List";
 import { Element } from "./Element";
 import { useUI } from "../../../../storage/ui.storage";
+import { cpu } from "../../../../cpu";
 
 function Separator() {
   return (
@@ -31,15 +33,23 @@ export default function HeaderControl() {
           <FaSave></FaSave>
         </Element>
         <Separator />
-        <Element>
+        <Element onClick={() => cpu.loadRom([0xff38800, 0xf390800, 0xf390806])}>
           <FaFileDownload></FaFileDownload>
         </Element>
         <Separator />
-        <Element onClick={() => ui.setAddingFile(true)}>
+        <Element
+          onClick={() => {
+            ui.setSidebarWindow("explorer");
+            ui.setAddingFile(true);
+          }}
+        >
           <FaFile></FaFile>
         </Element>
       </List>
       <List>
+        <Element onClick={() => cpu.reload()}>
+          <FaUndo />
+        </Element>
         <Element>
           <FaPlay />
         </Element>
@@ -56,7 +66,7 @@ export default function HeaderControl() {
           <FaBackward />
         </Element>
         <Separator />
-        <Element>
+        <Element onClick={() => cpu.next()}>
           <FaForward />
         </Element>
       </List>
