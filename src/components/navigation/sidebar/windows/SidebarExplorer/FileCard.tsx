@@ -20,6 +20,7 @@ export default function FileCard({ obj }: props) {
     if (editName)
       setTimeout(() => {
         ref.current?.focus();
+        ref.current?.select();
       }, 100);
   }, [editName]);
 
@@ -43,13 +44,34 @@ export default function FileCard({ obj }: props) {
       role="group"
     >
       {!editName ? (
-        <Box display="flex" alignItems="center" gap="3px">
-          <Icon color="#F7B217" as={LuBinary}></Icon>
-          <Box>{obj.name}</Box>
+        <Box
+          display="flex"
+          alignItems="center"
+          justifyContent="space-between"
+          w="full"
+        >
+          <Box display="flex" alignItems="center" gap="3px">
+            {" "}
+            <Icon color="#F7B217" as={LuBinary}></Icon>
+            <Box>{obj.name}</Box>
+          </Box>
+
+          <Box
+            fontSize="sm"
+            alignItems="center"
+            display="none"
+            _groupHover={{ display: "flex" }}
+            p="1"
+            borderRadius="md"
+            _hover={{ color: "gray.800", bgColor: "gray.300" }}
+            onClick={() => fileManager.removeFile(obj.id)}
+          >
+            <Icon color="gray.500" as={FaTrash}></Icon>
+          </Box>
         </Box>
       ) : (
         <Formik
-          initialValues={{ name: "" }}
+          initialValues={{ name: obj.name }}
           onSubmit={(values) => {
             renameFile(obj.id, values.name);
             setEditName(false);
@@ -70,6 +92,7 @@ export default function FileCard({ obj }: props) {
                 outline="none"
                 outlineColor="transparent"
                 width="100%"
+                fontSize="md"
                 size="xs"
                 onBlur={() => {
                   setEditName(false);
