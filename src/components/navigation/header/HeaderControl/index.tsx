@@ -11,6 +11,8 @@ import {
 } from "react-icons/fa";
 import { List } from "./List";
 import { Element } from "./Element";
+import { useUI } from "../../../../storage/ui.storage";
+import { cpu } from "../../../../cpu";
 
 function Separator() {
   return (
@@ -21,6 +23,8 @@ function Separator() {
 }
 
 export default function HeaderControl() {
+  const ui = useUI();
+
   return (
     <Box display="flex" gap="1rem">
       <List>
@@ -28,11 +32,16 @@ export default function HeaderControl() {
           <FaSave></FaSave>
         </Element>
         <Separator />
-        <Element>
+        <Element onClick={() => cpu.loadRom([0xff38800, 0xf390800, 0xf390806])}>
           <FaFileDownload></FaFileDownload>
         </Element>
         <Separator />
-        <Element>
+        <Element
+          onClick={() => {
+            ui.setSidebarWindow("explorer");
+            ui.setAddingFile(true);
+          }}
+        >
           <FaFile></FaFile>
         </Element>
       </List>
@@ -53,7 +62,7 @@ export default function HeaderControl() {
           <FaBackward />
         </Element>
         <Separator />
-        <Element>
+        <Element onClick={() => cpu.next()}>
           <FaForward />
         </Element>
       </List>

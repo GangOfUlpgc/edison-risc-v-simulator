@@ -7,14 +7,14 @@ export const operations: { [key: string]: string } = {
 };
 
 export const operationFunctions: { [key: string]: OperationFunction } = {
-  and: (a, b) => (parseInt(a, 2) & parseInt(b, 2)).toString(2),
-  or: (a, b) => (parseInt(a, 2) | parseInt(b, 2)).toString(2),
-  add: (a, b) => (parseInt(a, 2) + parseInt(b, 2)).toString(2),
-  sub: (a, b) => (parseInt(a, 2) - parseInt(b, 2)).toString(2),
-  slt: (a, b) => (parseInt(a, 2) < parseInt(b, 2) ? "1" : "0"),
-  xor: (a, b) => (parseInt(a, 2) ^ parseInt(b, 2)).toString(2),
-  srl: (a, b) => (parseInt(a, 2) >>> parseInt(b, 2)).toString(2),
-  sra: (a, b) => (parseInt(a, 2) >> parseInt(b, 2)).toString(2),
+  and: (a, b) => a & b,
+  or: (a, b) => a | b,
+  add: (a, b) => a + b,
+  sub: (a, b) => a - b,
+  slt: (a, b) => (a < b ? 1 : 0),
+  xor: (a, b) => a ^ b,
+  srl: (a, b) => a >>> b,
+  sra: (a, b) => a >> b,
 };
 
-export type OperationFunction = (a: string, b: string) => string;
+export type OperationFunction = (a: number, b: number) => number;

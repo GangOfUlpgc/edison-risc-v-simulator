@@ -1,11 +1,11 @@
-import { Box } from "@chakra-ui/react";
+import { Box, BoxProps } from "@chakra-ui/react";
 import React from "react";
 
-interface props {
+interface props extends BoxProps {
   children: React.ReactNode;
 }
 
-export function Element({ children }: props) {
+export function Element({ children, ...other }: props) {
   return (
     <Box
       textColor="gray.500"
@@ -17,6 +17,7 @@ export function Element({ children }: props) {
       height="1.9rem"
       cursor="pointer"
       _hover={{ bgColor: "gray.300", textColor: "gray.600" }}
+      {...other}
     >
       {children}
     </Box>
