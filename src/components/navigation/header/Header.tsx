@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Text } from "@chakra-ui/react";
 import HeaderControl from "./HeaderControl";
+import HeaderSelector from "./HeaderSelector";
 
 export default function Header() {
   return (
@@ -22,6 +23,9 @@ export default function Header() {
         <Text fontSize="xl" fontWeight="bold">
           Riscv-simulator
         </Text>
+      </Box>
+      <Box>
+        <HeaderSelector />
       </Box>
       {/* This is for the play button */}
       <Box>
