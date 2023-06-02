@@ -40,4 +40,5 @@ export interface UICPUState {
     WriteRegister: number;
   };
   setStageValue: (stage: string, key: string, value: number | string) => void;
+  reset: () => void;
 }

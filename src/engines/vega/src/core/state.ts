@@ -12,7 +12,7 @@ export const CPUMem = createStore<MemState>((set) => ({
   ],
 }));
 
-export const CPUState = createStore<UICPUState>((set) => ({
+const initialState = {
   pipeline: {
     IF: "nop",
     ID: "nop",
@@ -53,6 +53,11 @@ export const CPUState = createStore<UICPUState>((set) => ({
     WriteData: 0b0,
     WriteRegister: 0b0,
   },
+};
+
+export const CPUState = createStore<UICPUState>((set) => ({
+  ...initialState,
   setStageValue: (stage: string, key: string, value: string | number) =>
     set({ [stage]: { [key]: value } }),
+  reset: () => set(initialState),
 }));
