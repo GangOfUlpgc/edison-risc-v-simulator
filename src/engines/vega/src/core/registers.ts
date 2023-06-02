@@ -1,3 +1,5 @@
+import { RegisterBank } from "../types/registers";
+
 export function createRegisterBank(): RegisterBank {
   const registerBank: RegisterBank = {
     pc: 0,

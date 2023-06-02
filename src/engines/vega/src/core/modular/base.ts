@@ -9,8 +9,8 @@ export class DatapathComponent {
     this.inputs = inputs;
   }
 
-  public execute(): string {
+  public execute(): string[] {
     console.log("implement this method");
-    return "0";
+    return ["0"];
   }
 }

@@ -10,27 +10,21 @@ import SidebarElement from "./SidebarElement";
 import SidebarExplorer from "./windows/SidebarExplorer";
 import SidebarSearch from "./windows/SidebarSearch";
 import SidebarReg from "./windows/SidebarReg";
+import { useUI } from "../../../storage/ui.storage";
+import SidebarConfig from "./windows/SidebarConfig";
 
 const sidebarNav: { [name: string]: React.ReactNode } = {
-  "explorador": <SidebarExplorer></SidebarExplorer>,
-  "buscador": <SidebarSearch></SidebarSearch>,
-  "regmem": <SidebarReg></SidebarReg>
-}
+  explorer: <SidebarExplorer />,
+  regs: <SidebarReg />,
+  search: <SidebarSearch />,
+  config: <SidebarConfig />,
+};
 
 export function Sidebar() {
-  const [activeElement, setActiveElement] = useState('Explorador')
-
-  const handleElementClick = (name: any) => {
-    setActiveElement(name)
-    console.log(name)
-  }
-
+  const window = useUI((state) => state.sidebarWindow);
 
   return (
-    <Box
-      h="100%"
-      display="flex"
-    >
+    <Box h="100%" display="flex">
       <Box
         display="flex"
         flexDir="column"
@@ -39,30 +33,38 @@ export function Sidebar() {
         bgColor="gray.100"
         h="100%"
         borderRight="2px"
-        borderRightColor="gray.200"
+        borderRightColor="gray.300"
         justifyContent="space-between"
         py="1.6rem"
       >
         <Box display="flex" flexDir="column" gap="2.5rem">
-          <SidebarElement name="Explorador" active={activeElement === 'explorador'} onClick={() => handleElementClick('explorador')}>
+          <SidebarElement name="Explorador" slug="explorer">
             <VscFiles />
           </SidebarElement>
-          <SidebarElement name="Registros y memoria" active={activeElement === 'regmem'} onClick={() => handleElementClick('regmem')}>
+          <SidebarElement name="Registros y memoria" slug="regs">
             <VscDebugAlt />
           </SidebarElement>
-          <SidebarElement name="Buscador" active={activeElement === 'buscador'} onClick={() => handleElementClick('buscador')}>
+          <SidebarElement name="Buscador" slug="search">
             <VscSearch />
           </SidebarElement>
         </Box>
-        <SidebarElement name="Configuracion" active={activeElement === 'configuracion'} onClick={() => handleElementClick('configuracion')}>
+        <SidebarElement name="Configuracion" slug="config">
           <VscSettingsGear />
         </SidebarElement>
       </Box>
-      <Box width="20rem" height="100%" overflow="auto" bgColor="red" resize="horizontal">
-        {
-          sidebarNav[activeElement]
-        }
-      </Box>
+      {window && (
+        <Box
+          width="20rem"
+          height="100%"
+          overflow="auto"
+          bgColor="gray.100"
+          borderRight="2px"
+          borderRightColor="gray.300"
+          resize="horizontal"
+        >
+          {sidebarNav[window]}
+        </Box>
+      )}
     </Box>
   );
 }
