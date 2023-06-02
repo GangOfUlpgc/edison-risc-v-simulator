@@ -9,13 +9,13 @@ import {
 import SidebarElement from "./SidebarElement";
 import SidebarExplorer from "./windows/SidebarExplorer";
 import SidebarSearch from "./windows/SidebarSearch";
-import SidebarReg from "./windows/SidebarReg";
+import SidebarRegMem from "./windows/SidebarRegMem";
 import { useUI } from "../../../storage/ui.storage";
 import SidebarConfig from "./windows/SidebarConfig";
 
 const sidebarNav: { [name: string]: React.ReactNode } = {
   explorer: <SidebarExplorer />,
-  regs: <SidebarReg />,
+  regs: <SidebarRegMem />,
   search: <SidebarSearch />,
   config: <SidebarConfig />,
 };
