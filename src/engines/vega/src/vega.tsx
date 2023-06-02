@@ -1,4 +1,10 @@
-import { createRegisterBank } from "./core/registers";
+import { ALU } from "./core/mem/alu";
+import { PCRegister } from "./core/mem/pc";
+import { RAM } from "./core/mem/ram";
+import { RegisterBank } from "./core/mem/registers";
+import { ROM } from "./core/mem/rom";
+import { CPUStateManager } from "./core/mem/state";
+import { CPUState } from "./core/state";
 
 /**
  * Vega engine
@@ -14,32 +20,50 @@ import { createRegisterBank } from "./core/registers";
  *
  */
 export default class Vega {
-  public registers: RegisterBank;
-  public memory: Memory = {};
+  rom = new ROM();
+  ram = new RAM();
+  alu = new ALU();
+  registers = new RegisterBank();
+  pc = new PCRegister();
+  manager = new CPUStateManager();
 
-  constructor() {
-    this.registers = createRegisterBank();
+  loadRom(rom: number[]) {
+    this.rom.load(rom);
   }
 
-  private setPc(pc: number) {
-    this.registers.pc = pc;
+  next() {
+    this.fetch();
+    this.decode();
+    this.execute();
+    this.mem();
+    this.writeback();
   }
 
-  public load(assamblyCode: string) {
-    console.log("Vega load");
+  reload() {
+    this.pc.write(0);
+    this.manager.reset();
   }
 
-  public run() {
-    console.log("Vega run");
+  fetch() {
+    const instruction = this.rom.read(this.pc.read()) | 0;
+    this.pc.plus4();
+    this.manager.nextStep(instruction.toString());
+    console.log("fetch");
   }
 
-  public next() {
-    this.setPc(this.registers.pc + 0x4);
-    const instruction = this.memory[this.registers.pc];
-    console.log(instruction);
+  decode() {
+    console.log("decode");
   }
 
-  public prev() {
-    console.log("Vega prev");
+  execute() {
+    console.log("execute");
+  }
+
+  mem() {
+    console.log("mem");
+  }
+
+  writeback() {
+    console.log("writeback");
   }
 }

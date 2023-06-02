@@ -1,3 +1,17 @@
+export interface ControlUnitSignals {
+  // Execute stage
+  ALUop: string;
+  ALUsrc: string;
+  // Memory access stage
+  Branch: string;
+  MemRead: string;
+  MemWrite: string;
+  // Write back stage
+  RegWrite: string;
+  RegDst: string;
+  MemToReg: string;
+}
+
 export interface IControlUnit {
   Branch: string;
   MemRead: string;
