@@ -1,4 +1,5 @@
 import { ALU } from "./core/mem/alu";
+import { ControlUnit } from "./core/mem/controlUnit";
 import { PCRegister } from "./core/mem/pc";
 import { RAM } from "./core/mem/ram";
 import { RegisterBank } from "./core/mem/registers";
@@ -26,6 +27,7 @@ export default class Vega {
   registers = new RegisterBank();
   pc = new PCRegister();
   manager = new CPUStateManager();
+  controlUnit = new ControlUnit();
 
   loadRom(rom: number[]) {
     this.rom.load(rom);
