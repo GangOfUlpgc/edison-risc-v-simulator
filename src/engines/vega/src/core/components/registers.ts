@@ -1,4 +1,4 @@
-import { CPUMem } from "../state";
+import { CPUMem } from "../storage/mem";
 
 interface RegisterNext {
   rsc1: number;

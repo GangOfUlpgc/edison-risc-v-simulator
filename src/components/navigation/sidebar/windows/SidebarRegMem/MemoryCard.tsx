@@ -1,25 +1,51 @@
 import { Box, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { useCPUMem } from "../../../../../storage/cpu.storage";
+import { rv32i } from "../../../../../cpus/riscv-rv32i";
+
+const colors: { [state: string]: string } = {
+  fetch: "yellow.100",
+  decode: "blue.100",
+  execute: "green.100",
+  memory: "purple.100",
+  writeback: "pink.100",
+  idle: "transparent",
+};
 
 interface props {
   address: number;
-  value: string;
 }
 
-function MemoryCardElement({ address, value }: props) {
-  const { ram } = useCPUMem();
+function MemoryCardElement({ address }: props) {
+  const rom = rv32i.useMem((state) => state.rom);
+  const pc = rv32i.useMem((state) => state.pc);
+  const value = rom[address];
+  const status = getStatus();
+
+  function getStatus() {
+    if (pc == address) return "fetch";
+    if (pc == address + 4) return "decode";
+    if (pc == address + 8) return "execute";
+    if (pc == address + 12) return "memory";
+    if (pc == address + 16) return "writeback";
+    return "idle";
+  }
 
   return (
-    <Box display="flex" justifyContent="center" minW="6rem" flexGrow="1">
+    <Box
+      display="flex"
+      justifyContent="center"
+      minW="6rem"
+      flexGrow="1"
+      backgroundColor={colors[status]}
+    >
       <Text
         textAlign="center"
         flexBasis="50%"
         textColor="gray.600"
         fontWeight="semibold"
       >
-        0x${address.toString(16).padStart(8, "0")}
+        0x{address.toString(16).padStart(8, "0")}
       </Text>
       <Text
         textAlign="center"
@@ -27,7 +53,7 @@ function MemoryCardElement({ address, value }: props) {
         textColor="gray.600"
         fontWeight="semibold"
       >
-        add x1, x1, x2
+        {value ? "0x" + value.toString(16).padStart(8, "0") : "0x00000000"}
       </Text>
     </Box>
   );
@@ -36,9 +62,7 @@ function MemoryCardElement({ address, value }: props) {
 export default function MemoryCard() {
   const [items, setItems] = useState(Array.from({ length: 70 }));
   const showMoreAddress = () => {
-    setTimeout(() => {
-      setItems((prevItems) => prevItems.concat(Array.from({ length: 20 })));
-    }, 200);
+    setItems((prevItems) => prevItems.concat(Array.from({ length: 20 })));
   };
 
   return (
@@ -88,11 +112,7 @@ export default function MemoryCard() {
           loader={<h4>Loading...</h4>}
         >
           {items.map((item, index) => (
-            <MemoryCardElement
-              key={index}
-              address={index}
-              value="add x1, x0, x1"
-            />
+            <MemoryCardElement key={index} address={index * 4} />
           ))}
         </InfiniteScroll>
       </Box>
