@@ -1,4 +1,4 @@
-class ControlUnit {
+export class ControlUnit {
   generateSignals() {
     // TODO
   }

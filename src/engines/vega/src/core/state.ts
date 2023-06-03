@@ -13,6 +13,7 @@ export const CPUMem = createStore<MemState>((set) => ({
 }));
 
 const initialState = {
+  cycles: 0,
   pipeline: {
     IF: "nop",
     ID: "nop",
