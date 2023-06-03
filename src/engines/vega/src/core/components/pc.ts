@@ -1,4 +1,4 @@
-import { CPUMem, CPUState } from "../state";
+import { CPUMem } from "../storage/mem";
 
 interface PCNext {
   pc: number;

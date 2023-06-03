@@ -1,4 +1,4 @@
-import { CPUState } from "../state";
+import { CPUState } from "../storage/cpu";
 
 export class CPUStateManager {
   getState() {

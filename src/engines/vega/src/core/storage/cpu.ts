@@ -1,16 +1,5 @@
 import { createStore } from "zustand";
-import { MemState } from "../types/mem";
-import { UICPUState } from "../types/ui";
-
-export const CPUMem = createStore<MemState>((set) => ({
-  pc: 0x0,
-  rom: {},
-  ram: {},
-  registers: [
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0,
-  ],
-}));
+import { UICPUState } from "../../types/state";
 
 const initialState = {
   cycles: 0,
