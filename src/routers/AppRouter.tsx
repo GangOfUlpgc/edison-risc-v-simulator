@@ -3,6 +3,7 @@ import SimulatorPage from "../pages/simulator/SimulatorPage";
 import EditorPage from "../pages/simulator/pages/editor/EditorPage";
 import DissasemblerPage from "../pages/simulator/pages/dissasembler/DissasemblerPage";
 import DatapathPage from "../pages/simulator/pages/datapath/DatapathPage";
+import React from "react";
 
 export const AppRouter = createBrowserRouter([
   {
