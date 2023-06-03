@@ -39,6 +39,8 @@ export default function HeaderControl() {
           onClick={() => {
             rv32i.loadRom([0xff38800, 0xf390800, 0xf390806]);
             nav("dissasembly");
+            ui.setSidebarWindow("regs");
+            ui.setRegisterWindow("mem");
           }}
         >
           <FaFileDownload></FaFileDownload>
