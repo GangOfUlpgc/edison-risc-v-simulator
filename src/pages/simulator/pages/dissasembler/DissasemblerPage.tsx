@@ -1,13 +1,13 @@
 import React from "react";
-import { useCPUMem, useCPUState } from "../../../../storage/cpu.storage";
+import { rv32i } from "../../../../cpus/riscv-rv32i";
 
 export default function DissasemblerPage() {
-  const rom = useCPUMem();
-  const state = useCPUState();
+  const rom = rv32i.useMem((state) => state.rom);
+  const state = rv32i.useState();
   return (
     <div>
-      <pre>{JSON.stringify(rom)}</pre>
-      <pre>{JSON.stringify(state)}</pre>
+      <pre style={{ maxWidth: "100px" }}>{JSON.stringify(rom)}</pre>
+      <pre style={{ maxWidth: "100px" }}>{JSON.stringify(state)}</pre>
     </div>
   );
 }

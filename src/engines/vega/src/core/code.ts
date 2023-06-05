@@ -60,6 +60,7 @@ function codei(load : string[]) {
     const fun3 = ""
     const opcode = ""
 
+    
 
     const result = inmediato + r1 + fun3 + rd + opcode
     return result

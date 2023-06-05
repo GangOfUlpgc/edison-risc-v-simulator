@@ -1,9 +1,11 @@
-import { LuHexagon } from "react-icons/lu"
 
 interface IDecodedInstruction{
-    hex: string,
-    bin: string | undefined
-    numeric: number
+    rd : number,
+    rs : number
+    rt : number
+    type : string
+    inmedia : number
+    aluop : number
 }
 
 const opCode : {[op: string] : string} = {
@@ -46,14 +48,18 @@ export function decodeInstruction(instruction : string): IDecodedInstruction{
     const flako = instruction.replace(",", "")
 
     const string_s = flako.split(" ")
-    let resultado = ""
+
+    let resultado : any[] = [null, null, null, null, null, null];
 
     instructionsFun[string_s[0]](string_s)
 
     return {
-        hex: parseInt(resultado ,2).toString(16),
-        bin: resultado,
-        numeric: parseInt(resultado, 2)
+        rd : resultado[0],
+        rs : resultado[1],
+        rt : resultado[2],
+        type : resultado[3],
+        inmedia : resultado[4],
+        aluop : resultado[5]
     }
 }
 
@@ -72,8 +78,6 @@ function itype(load : string[]) {
 
     const fun3 = funCode[load[0]]
     const opcode = opCode[load[0]]
-
-
     const result = inmediato + r1 + fun3 + rd + opcode
     return result
 
