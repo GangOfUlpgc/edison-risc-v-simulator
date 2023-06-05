@@ -1,44 +1,33 @@
 import { LuHexagon } from "react-icons/lu"
 
-interface IDecodedInstruction{
-    hex: string,
-    bin: string | undefined
-    numeric: number
+interface CodedInstruction{
+    instruct: string
 }
-
-const opCode : {[op: string] : string} = {
-    "ld" : "0010011",
-    "sd" : "0100011",
-    "beq" : "1100011"
-}
-
-const funCode : {[op: string] : string} = {
-    "ld" : "011",
-    "sd" : "011",
-    "beq" : "000",
-    "add" : "000", 
-    "sub" : "000",
-    "and" : "111",
-    "or" : "110"
-}
-
-const rcode : {[op: string] : string} = {
-    "add" : "0000000",
-    "sub" : "0100000",
-    "and" : "0000000",
-    "or" : "0000000"
-}    
-
 
 const instructionsFun : {[instruction : string] : (load: string[]) => any} = {
-    "add" : rtype, 
-    "ld": itype,
-    "sd": stype,
-    "beq": sbtype,
-    "default": rtype
+    "0010011" : codei,
+    "0100011" : codes,
+    "1100011" : codesb,
+    "0110011" : coder
 }
 
-export function decodeInstruction(instruction : string): IDecodedInstruction{ 
+const rnames : {[op: string] : string} = {
+    "000" : "todefi",
+    "111" : "and",
+    "110" : "or",
+    "0000000" : "add",
+    "0100000" : "sub"
+}  
+
+
+const names : {[op: string] : string} = {
+    "0110011" : "r", 
+    "0010011" : "ld",
+    "0100011": "sd",
+    "1100011": "beq"
+}
+
+export function codeInstruction(instruction : string): CodedInstruction{ 
     /**
      * Decodes a RISCV instruction to hex, bin and numeric
      */
@@ -51,14 +40,12 @@ export function decodeInstruction(instruction : string): IDecodedInstruction{
     instructionsFun[string_s[0]](string_s)
 
     return {
-        hex: parseInt(resultado ,2).toString(16),
-        bin: resultado,
-        numeric: parseInt(resultado, 2)
+        instruct : resultado
     }
 }
 
 
-function itype(load : string[]) {
+function codei(load : string[]) {
 
     let inmediato = load[2].substring(0, load[2].indexOf("("))
     inmediato = parseInt(inmediato, 10).toString(2)
@@ -70,8 +57,8 @@ function itype(load : string[]) {
     rd = parseInt(rd, 10).toString(2)
     rd = rd.padStart(5,"0")
 
-    const fun3 = funCode[load[0]]
-    const opcode = opCode[load[0]]
+    const fun3 = ""
+    const opcode = ""
 
 
     const result = inmediato + r1 + fun3 + rd + opcode
@@ -79,7 +66,7 @@ function itype(load : string[]) {
 
 }
 
-function stype(save : string[]) {
+function codes(save : string[]) {
 
     let inmediato1 = save[2].substring(0, save[2].indexOf("("))
     inmediato1 = parseInt(inmediato1, 10).toString(2)
@@ -91,15 +78,15 @@ function stype(save : string[]) {
     r2 = parseInt(r2, 10).toString(2)
     r2 = r2.padStart(5,"0")
 
-    const fun3 = funCode[save[0]]
-    const opcode = opCode[save[0]]
+    const fun3 = ""
+    const opcode = ""
 
 
     const result = inmediato1.substring(0, 6) +  r2 + r1 + fun3 + inmediato1.substring(6) + opcode
     return result
 }
 
-function sbtype(branch : string[]) {
+function codesb(branch : string[]) {
     let inmediato = branch[3]
     inmediato = parseInt(inmediato, 10).toString(2)
     inmediato = inmediato.padStart(12,"0")
@@ -111,14 +98,14 @@ function sbtype(branch : string[]) {
     r2 = parseInt(r2, 10).toString(2)
     r2 = r2.padStart(5,"0")
 
-    const fun3 = funCode[branch[0]]
-    const opcode = opCode[branch[0]]
+    const fun3 = "add"
+    const opcode = "add"
 
     const result = inmediato[0] + inmediato.substring(1, 7) + r2 + r1 + fun3 + inmediato.substring(7,11) + inmediato[1] + opcode
     return result
 }
 
-function rtype(registros : string[]) {
+function coder(registros : string[]) {
     
     let rd = registros[1].replace("x", "")
     rd = parseInt(rd, 10).toString(2)
@@ -131,9 +118,9 @@ function rtype(registros : string[]) {
     r2 = parseInt(r2, 10).toString(2)
     r2 = r2.padStart(5,"0")
 
-    const fun3 = funCode[registros[0]]
+    const fun3 = "add"
     const opcode = "0110011"
-    const codigo = rcode[registros[0]]
+    const codigo = "add"
 
     if(codigo == undefined) {
             console.log("Estas usando una instruccion que no existe error")
