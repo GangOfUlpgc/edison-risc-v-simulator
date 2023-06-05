@@ -1,5 +1,3 @@
 import Vega from "./vega";
 
-export default {
-  Vega,
-};
+export { Vega };

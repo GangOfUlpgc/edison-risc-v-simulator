@@ -1,4 +1,5 @@
 export interface UICPUState {
+  cycles: number;
   pipeline: {
     IF: string;
     ID: string;

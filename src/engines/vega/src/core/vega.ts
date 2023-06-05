@@ -1,10 +1,14 @@
-import { ALU } from "./core/mem/alu";
-import { PCRegister } from "./core/mem/pc";
-import { RAM } from "./core/mem/ram";
-import { RegisterBank } from "./core/mem/registers";
-import { ROM } from "./core/mem/rom";
-import { CPUStateManager } from "./core/mem/state";
-import { CPUState } from "./core/state";
+import { create } from "zustand";
+import {
+  ALU,
+  ControlUnit,
+  RAM,
+  ROM,
+  RegisterBank,
+  CPUStateManager,
+  PCRegister,
+} from "./components";
+import { CPUState, CPUMem } from "./storage";
 
 /**
  * Vega engine
@@ -26,6 +30,7 @@ export default class Vega {
   registers = new RegisterBank();
   pc = new PCRegister();
   manager = new CPUStateManager();
+  controlUnit = new ControlUnit();
 
   loadRom(rom: number[]) {
     this.rom.load(rom);
@@ -65,5 +70,13 @@ export default class Vega {
 
   writeback() {
     console.log("writeback");
+  }
+
+  get useMem() {
+    return create(CPUMem);
+  }
+
+  get useState() {
+    return create(CPUState);
   }
 }

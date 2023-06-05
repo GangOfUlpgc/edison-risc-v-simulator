@@ -13,7 +13,8 @@ import {
 import { List } from "./List";
 import { Element } from "./Element";
 import { useUI } from "../../../../storage/ui.storage";
-import { cpu } from "../../../../cpu";
+import { rv32i } from "../../../../cpus/riscv-rv32i";
+import { useNavigate } from "react-router";
 
 function Separator() {
   return (
@@ -24,6 +25,7 @@ function Separator() {
 }
 
 export default function HeaderControl() {
+  const nav = useNavigate();
   const ui = useUI();
 
   return (
@@ -33,7 +35,14 @@ export default function HeaderControl() {
           <FaSave></FaSave>
         </Element>
         <Separator />
-        <Element onClick={() => cpu.loadRom([0xff38800, 0xf390800, 0xf390806])}>
+        <Element
+          onClick={() => {
+            rv32i.loadRom([0xff38800, 0xf390800, 0xf390806]);
+            nav("dissasembly");
+            ui.setSidebarWindow("regs");
+            ui.setRegisterWindow("mem");
+          }}
+        >
           <FaFileDownload></FaFileDownload>
         </Element>
         <Separator />
@@ -47,7 +56,7 @@ export default function HeaderControl() {
         </Element>
       </List>
       <List>
-        <Element onClick={() => cpu.reload()}>
+        <Element onClick={() => rv32i.reload()}>
           <FaUndo />
         </Element>
         <Element>
@@ -66,7 +75,7 @@ export default function HeaderControl() {
           <FaBackward />
         </Element>
         <Separator />
-        <Element onClick={() => cpu.next()}>
+        <Element onClick={() => rv32i.next()}>
           <FaForward />
         </Element>
       </List>
