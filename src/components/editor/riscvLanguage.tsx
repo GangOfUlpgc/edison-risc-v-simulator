@@ -23,11 +23,11 @@ export function registerLanguage(monaco: any) {
       base: "vs",
       inherit: true,
       rules: [
-        { token: "keyword", foreground: "0000FF" }, // Color para palabras clave
+        { token: "keyword", foreground: "red" }, // Color para palabras clave
         { token: "register", foreground: "00AA00" }, // Color para registros
         { token: "label", foreground: "FF00FF" }, // Color para etiquetas
       ],
     });
   
-    monaco.editor.setTheme("riscv-theme");
+    //monaco.editor.setTheme("riscv-theme");
   }

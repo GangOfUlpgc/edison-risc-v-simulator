@@ -3,6 +3,8 @@ import Editor, { useMonaco } from "@monaco-editor/react";
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import { useFileStorage } from "../../storage/file.storage";
 import { registerLanguage } from "./riscvLanguage";
+import CodeMirror from '@uiw/react-codemirror'
+import { Box } from "@chakra-ui/react";
 
 export default function CodeEditor() {
   const fileManager = useFileStorage();
@@ -21,14 +23,6 @@ export default function CodeEditor() {
   }, [monaco]);
 
   return (
-    <Editor
-      value={text}
-      onChange={(content) =>
-        fileManager.writeFile(fileManager.currentFile ?? "0", content || "")
-      }
-      width="100%"
-      height="100%"
-      language="riscv" // Cambia el valor del lenguaje a "riscv"
-    />
+    <CodeMirror autoFocus={true} theme='light' height='100%'></CodeMirror>
   );
 }
