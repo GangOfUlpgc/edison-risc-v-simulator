@@ -10,6 +10,7 @@ import "reactflow/dist/style.css";
 import { DatapathNodes } from "./core/nodes";
 import riscv32i from "./datapath/riscv32i";
 import { Box } from "@chakra-ui/react";
+import { rv32i } from "src/cpus";
 
 export default function Punk() {
   const [nodes] = useNodesState(riscv32i.nodes);
