@@ -73,6 +73,12 @@ const nodes: Node[] = [
     type: "bufferidex",
     position: {x: 450, y: 150},
     data: {label: "buffer id/ex"},
+  },
+  {
+    id: "exmem",
+    type: "bufferexmem",
+    position: {x: 1000, y: 150},
+    data: {label: "buffer ex/mem"},
   }
 ];
 const edges: Edge[] = [
