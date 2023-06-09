@@ -27,6 +27,7 @@
     "react-infinite-scroll-component": "^6.1.0",
     "react-resizable": "^3.0.5",
     "react-router-dom": "^6.11.2",
+    "reactflow": "^11.7.2",
     "sort-by": "^1.2.0",
     "url": "^0.11.0",
     "xstate": "^4.37.2",
