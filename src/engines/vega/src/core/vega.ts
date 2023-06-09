@@ -31,17 +31,19 @@ export default class Vega {
   pc = new PCRegister();
   manager = new CPUStateManager();
   controlUnit = new ControlUnit();
+  newInstruction = 0;
 
   loadRom(rom: number[]) {
     this.rom.load(rom);
   }
 
   next() {
-    this.fetch();
-    this.decode();
-    this.execute();
-    this.mem();
     this.writeback();
+    this.mem();
+    this.execute();
+    this.decode();
+    this.fetch();
+    this.manager.nextStep(this.newInstruction.toString());
   }
 
   reload() {
@@ -52,12 +54,34 @@ export default class Vega {
   fetch() {
     const instruction = this.rom.read(this.pc.read()) | 0;
     this.pc.plus4();
-    this.manager.nextStep(instruction.toString());
-    console.log("fetch");
+    this.newInstruction = instruction;
+    this.manager.setState(() => ({
+      fetch: {
+        instruction: instruction.toString(16),
+      },
+    }));
   }
 
   decode() {
-    console.log("decode");
+    //DECODIFICAR LA INSTRUCCION Y GUARDARLA
+
+    const rs1 = 0;
+    const rs2 = 0;
+    const inmm = 0;
+
+    const val1 = this.registers.read(rs1);
+    const val2 = this.registers.read(rs2);
+
+    this.manager.setState((state) => ({
+      decode: {
+        instruction: this.manager.getState().fetch.instruction,
+        rs1: rs1,
+        rs2: rs2,
+        rs1Value: val1,
+        rs2Value: val2,
+        inmm: inmm,
+      },
+    }));
   }
 
   execute() {
