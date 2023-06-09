@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@chakra-ui/layout";
 import { useFileStorage } from "../../../../storage/file.storage";
-import CodeEditor from "../../../../components/editor/CodeEditor";
+import CodeEditor from "../../../../components/editor/Editor";
 
 export default function EditorPage() {
   const isFileSelected = useFileStorage((state) => state.currentFile);
