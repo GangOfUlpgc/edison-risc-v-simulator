@@ -23,7 +23,7 @@ const nodes: Node[] = [
   },
   {
     id: "1",
-    position: { x: 0, y: 45 },
+    position: { x: -250, y: 250 },
     type: "pc",
     data: { label: "PC" },
     targetPosition: Position.Left,
@@ -31,7 +31,7 @@ const nodes: Node[] = [
   },
   {
     id: "2",
-    position: { x: 250, y: 0 },
+    position: { x: 400, y: 400 },
     data: { label: "Instruction Memory" },
     targetPosition: Position.Left,
     style: {
@@ -54,11 +54,35 @@ const nodes: Node[] = [
     targetPosition: Position.Right,
     sourcePosition: Position.Right,
   },
+  {
+    id: "5",
+    type: "registers",
+    position: { x: 300, y: 200 },
+    data: { label: "registers" },
+    targetPosition: Position.Right,
+    sourcePosition: Position.Right,
+  },
+  {
+    id: "6",
+    type: "bufferifid",
+    position: {x: 50, y: 150},
+    data: {label: "buffer if/id"},
+    targetPosition: Position.Right,
+    sourcePosition: Position.Left
+  },
+  {
+    id: "7",
+    type: "instrMemory",
+    position: {x: -100, y: 250},
+    data: {label: "Instruction Memory"},
+    targetPosition: Position.Right,
+    sourcePosition: Position.Left
+  },
 ];
 const edges: Edge[] = [
-  { id: "e1-2", source: "1", target: "2", label: "0x00000000" },
-  { id: "e0-1", source: "0", target: "1" },
-  { id: "e0-2", source: "0", target: "-1", targetHandle: "input 1" },
+  { id: "e1-2", source: "1", target: "7", label: "0x00000000", targetHandle: "address", sourceHandle:"output" },
+
+
 ];
 
 export default {
