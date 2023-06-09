@@ -1,3 +1,4 @@
+import { UICPUState } from "@vega/types/state";
 import { CPUState } from "../storage/cpu";
 
 export class CPUStateManager {
@@ -5,8 +6,8 @@ export class CPUStateManager {
     return CPUState.getState();
   }
 
-  setState(state: any) {
-    CPUState.setState(state);
+  get setState() {
+    return CPUState.setState;
   }
 
   reset() {

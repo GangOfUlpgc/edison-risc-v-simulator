@@ -20,7 +20,8 @@
     "noFallthroughCasesInSwitch": true,
     "baseUrl": ".",
     "paths": {
-      "@vega/*": ["src/engines/vega/src/*"]
+      "@vega/*": ["src/engines/vega/src/*"],
+      "@punk/*": ["src/engines/punk/src/*"]
     }
   },
   "include": ["src"],

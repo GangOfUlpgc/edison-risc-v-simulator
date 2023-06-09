@@ -13,6 +13,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@vega": path.resolve(__dirname, "src/engines/vega/src"),
+      "@punk": path.resolve(__dirname, "src/engines/punk/src"),
     },
   },
 });
