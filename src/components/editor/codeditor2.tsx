@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 export default function CodeEditor() {
   const [text, setText] = useState('');
 
-  const handleTextChange = (editor, data, value) => {
+  const handleTextChange = (editor: any, data: any, value: any) => {
     setText(value);
   };
 

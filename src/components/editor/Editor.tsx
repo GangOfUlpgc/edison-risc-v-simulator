@@ -1,5 +1,36 @@
 import React from 'react';
 import CodeMirror from '@uiw/react-codemirror';
+import { StreamLanguage } from '@codemirror/language';
+import { RiscVLang, riscv } from './riscvLang';
+import { javascript } from '@codemirror/lang-javascript';
+//import '@codemirror/lang-lezer';
+
+function App() {
+    const onChange = React.useCallback((value: any, viewUpdate: any) => {
+      console.log('value:', value);
+    }, []);
+
+
+
+    return (
+      <CodeMirror
+        value="#Toma geroma pastillas de goma"
+        autoFocus={true}
+        height="500px"
+        theme={'dark'}
+        extensions={[RiscVLang]}
+        onChange={onChange}
+      />
+    );
+  }
+  export default App;
+  
+
+
+
+/*
+import React from 'react';
+import CodeMirror from '@uiw/react-codemirror';
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/dracula.css';
 import { EditorState, EditorView, basicSetup } from '@codemirror/basic-setup';
@@ -95,30 +126,8 @@ function App() {
 }
 
 export default App;
+*/
 
 
 
 
-/*
-import React from 'react';
-import CodeMirror from '@uiw/react-codemirror';
-import { javascript } from '@codemirror/lang-javascript';
-//import '@codemirror/lang-lezer';
-
-function App() {
-    const onChange = React.useCallback((value: any, viewUpdate: any) => {
-      console.log('value:', value);
-    }, []);
-    return (
-      <CodeMirror
-        value="#Toma geroma pastillas de goma"
-        autoFocus={true}
-        height="500px"
-        theme={'dark'}
-        extensions={[javascript({ jsx: true })]}
-        onChange={onChange}
-      />
-    );
-  }
-  export default App;
-  */
