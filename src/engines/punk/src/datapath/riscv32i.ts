@@ -41,8 +41,16 @@ const nodes: Node[] = [
   {
     id: "3",
     type: "alu",
-    position: { x: 0, y: 0 },
+    position: { x: 200, y: 200 },
     data: { label: "Alu" },
+    targetPosition: Position.Right,
+    sourcePosition: Position.Right,
+  },
+  {
+    id: "4",
+    type: "datamem",
+    position: { x: -200, y: -200 },
+    data: { label: "DataMem" },
     targetPosition: Position.Right,
     sourcePosition: Position.Right,
   },
