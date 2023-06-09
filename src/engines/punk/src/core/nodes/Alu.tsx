@@ -14,7 +14,7 @@ export default function Alu() {
       <Handle type="target" position={Position.Left} style={firstInputStyle} id="input1" />
       <Handle type="target" position={Position.Left} style={secondInputStyle} id="input2" />
       <Handle type="target" position={Position.Bottom} style={selectorStyle} id="selector" />
-      <Handle type="target" position={Position.Right} style={outputStyle} id="output" />
+      <Handle type="source" position={Position.Right} style={outputStyle} id="output" />
     </Box>
   );
 }

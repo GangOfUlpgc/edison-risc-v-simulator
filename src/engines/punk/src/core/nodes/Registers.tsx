@@ -13,10 +13,10 @@ export default function Registers() {
   return (
     <Box backgroundColor="gray.200" position="relative" height="100">
       <Box padding="2" py="6">Registers</Box>
-      <Handle type="source" position={Position.Left} style={firstReadRegStyle} id="readReg1" />
-      <Handle type="source" position={Position.Left} style={secondReadRegStyle} id="readReg2" />
-      <Handle type="source" position={Position.Left} style={writeRegStyle} id="writeReg" />
-      <Handle type="source" position={Position.Left} style={writeDataStyle} id="writeData" />
+      <Handle type="target" position={Position.Left} style={firstReadRegStyle} id="readReg1" />
+      <Handle type="target" position={Position.Left} style={secondReadRegStyle} id="readReg2" />
+      <Handle type="target" position={Position.Left} style={writeRegStyle} id="writeReg" />
+      <Handle type="target" position={Position.Left} style={writeDataStyle} id="writeData" />
       <Handle type="source" position={Position.Right} style={firstReadDataStyle} id="readData1" />
       <Handle type="source" position={Position.Right} style={secondReadDataStyle} id="readData2" />
     </Box>
