@@ -2,6 +2,7 @@ import Adder from "./Adder";
 import Alu from "./Alu";
 import BufferExMem from "./BufferExMem";
 import BufferIdEx from "./BufferIdEx";
+import BufferMemWb from "./BufferMemWb";
 import DataMem from "./DataMem";
 import InstructionMemory from "./InstructionMemory";
 import Multiplexor from "./Multiplexor";
@@ -20,6 +21,7 @@ const DatapathNodes = {
   bufferifid: BufferIfId,
   bufferidex: BufferIdEx,
   bufferexmem: BufferExMem,
+  buffermemwb: BufferMemWb
 };
 
 export { Adder, Alu, DataMem, Multiplexor, PC, Registers, DatapathNodes };
