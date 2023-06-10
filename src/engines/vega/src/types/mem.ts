@@ -1,3 +1,5 @@
+import { EncodedInstruction, EncodedInstructionMeta } from "./assambler";
+
 export type Address = number;
 
 export type Memory = {
@@ -6,7 +8,7 @@ export type Memory = {
 
 export interface MemState {
   pc: number;
-  rom: { [dir: number]: number };
+  rom: { [dir: number]: { value: number; meta?: EncodedInstructionMeta } };
   ram: { [dir: number]: number };
   registers: [
     number,

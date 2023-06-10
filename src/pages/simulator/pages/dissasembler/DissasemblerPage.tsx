@@ -1,8 +1,17 @@
 import React, { useState } from "react";
 import { rv32i } from "../../../../cpus/riscv-rv32i";
-import { Box, Grid, GridItem } from "@chakra-ui/react";
+import { As, Box, Grid, GridItem } from "@chakra-ui/react";
+import Header from "./components/Header";
+import DisasemblerCard from "./components/DisasemblerCard";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function DissasemblerPage() {
+  const rom = rv32i.useMem((state) => state.rom);
+  const [items, setItems] = useState(Array.from({ length: 70 }));
+  const showMoreAddress = () => {
+    setItems((prevItems) => prevItems.concat(Array.from({ length: 20 })));
+  };
+
   return (
     <Box
       height="100%"
@@ -12,48 +21,11 @@ export default function DissasemblerPage() {
       display="flex"
       flexDir="column"
     >
-      <Grid width="100%" templateColumns="repeat(8, 1fr)">
-        <GridItem
-          fontWeight="semibold"
-          colSpan={1}
-          bg="gray.200"
-          padding="1"
-          borderTopLeftRadius="xl"
-          borderWidth={2}
-          borderRightWidth={0}
-          borderColor="gray.300"
-          px="4"
-        >
-          Address
-        </GridItem>
-        <GridItem
-          fontWeight="semibold"
-          colSpan={1}
-          bg="gray.200"
-          padding="1"
-          px="4"
-          borderWidth={2}
-          borderColor="gray.300"
-        >
-          Opcode
-        </GridItem>
-        <GridItem
-          fontWeight="semibold"
-          colSpan={6}
-          bg="gray.200"
-          padding="1"
-          px="4"
-          borderWidth={2}
-          borderLeftWidth={0}
-          borderTopRightRadius="xl"
-          borderColor="gray.300"
-        >
-          Dissasembly
-        </GridItem>
-      </Grid>
-      <Grid
-        width="100%"
-        templateColumns="repeat(8, 1fr)"
+      <Header></Header>
+
+      <Box
+        id="registerContainer"
+        height="100%"
         overflow="auto"
         borderWidth={2}
         borderColor="gray.300"
@@ -62,55 +34,27 @@ export default function DissasemblerPage() {
         borderTopRadius="none"
         backgroundColor="white"
       >
-        {new Array(40).fill(0).map(() => (
-          <>
-            <GridItem
-              px="4"
-              py="1"
-              fontWeight="semibold"
-              textColor="gray.800"
-              borderWidth={2}
-              colSpan={1}
-              borderColor="transparent"
-              borderBottomColor="gray.300"
-              backgroundColor="gray.100"
-            >
-              0x00FF8000
-            </GridItem>
-            <GridItem
-              backgroundColor="gray.100"
-              borderWidth={2}
-              borderColor="transparent"
-              borderLeftColor="gray.300"
-              borderBottomColor="gray.300"
-              colSpan={1}
-              px="4"
-              py="1"
-              fontWeight="semibold"
-              textColor="gray.800"
-            >
-              00034
-            </GridItem>
-            <GridItem
-              borderWidth={2}
-              borderColor="transparent"
-              borderLeftColor="gray.300"
-              borderBottomColor="gray.300"
-              colSpan={6}
-              px="4"
-              py="1"
-              fontWeight="semibold"
-              textColor="gray.800"
-            >
-              .text
-              <br />
-              .global main
-              <br />
-              addi x0, x0, 1
-            </GridItem>
-          </>
-        ))}
-      </Grid>
+        <InfiniteScroll
+          scrollableTarget="registerContainer"
+          style={{
+            display: "grid",
+            width: "100%",
+            gridTemplateColumns: "repeat(8, 1fr)",
+          }}
+          dataLength={items.length}
+          next={showMoreAddress}
+          hasMore={true}
+          loader={<h4>Loading...</h4>}
+        >
+          {items.map((item, index) => (
+            <DisasemblerCard
+              key={index}
+              address={index * 4}
+              obj={rom[index * 4]}
+            />
+          ))}
+        </InfiniteScroll>
+      </Box>
     </Box>
   );
 }
