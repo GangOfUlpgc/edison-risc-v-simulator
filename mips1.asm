@@ -1,3 +1,3 @@
-main: 
-      addi $t1, $t1, 4
-      jal main
+main:
+addi $t0, $t0, 4
+jal main
