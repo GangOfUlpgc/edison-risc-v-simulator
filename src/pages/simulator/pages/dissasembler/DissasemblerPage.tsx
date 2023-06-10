@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { rv32i } from "../../../../cpus/riscv-rv32i";
 import { Box, Grid, GridItem } from "@chakra-ui/react";
 
