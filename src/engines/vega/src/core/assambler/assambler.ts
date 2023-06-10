@@ -2,8 +2,6 @@ import { EncodedInstruction } from "@vega/types/assambler";
 import { Encoder } from "./encoder";
 import { Preprocessor } from "./preprocessor";
 
-
-
 export class Assambler {
   encoder: Encoder;
   preprocessor: Preprocessor;
@@ -21,22 +19,20 @@ export class Assambler {
     jalr x0, main
     */
     const processed_program = this.preprocessor.preprocess(program);
+    console.log("processed program");
+    console.log(processed_program);
 
     /*
     addi x0, x0, 1
     jalr x0, 0x00000000
     */
 
-    let final_lines : EncodedInstruction[] = []
+    let final_lines: EncodedInstruction[] = [];
 
-    for(let x = 0; x<processed_program.length;x++) {
-      final_lines.push(this.encoder.encode(processed_program[x]))
+    for (let x = 0; x < processed_program.length; x++) {
+      final_lines.push(this.encoder.encode(processed_program[x]));
     }
 
-    const atributos = Object.keys(final_lines[1]);
-    console.log(atributos)
-
     return final_lines;
-
   }
 }

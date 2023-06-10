@@ -19,7 +19,7 @@ interface props {
 function MemoryCardElement({ address }: props) {
   const rom = rv32i.useMem((state) => state.rom);
   const pc = rv32i.useMem((state) => state.pc);
-  const value = rom[address];
+  const value = rom[address]?.value | 0;
   const status = getStatus();
 
   function getStatus() {
