@@ -1,25 +1,48 @@
 import React from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { StreamLanguage } from '@codemirror/language';
-import { RiscVLang, riscv } from './riscvLang';
-import { javascript } from '@codemirror/lang-javascript';
+import { RiscVLang, riscvTheme } from './riscvLang';
+import {indentWithTab} from "@codemirror/commands"
+import {EditorView, keymap, highlightSpecialChars} from "@codemirror/view"
 //import '@codemirror/lang-lezer';
 
 function App() {
     const onChange = React.useCallback((value: any, viewUpdate: any) => {
       console.log('value:', value);
     }, []);
+    
+    const options = React.useMemo(() => {
+      return {
+        indentWithTabs: false,
+        indentUnit: 2,
+        tabSize: 2,
+        extraKeys: {
+          Tab: 'defaultTab',
+        },
+      };
+    }, []);
 
-
+    const extensions=[RiscVLang];
 
     return (
       <CodeMirror
         value="#Toma geroma pastillas de goma"
+        basicSetup
         autoFocus={true}
         height="500px"
-        theme={'dark'}
-        extensions={[RiscVLang]}
+        theme={riscvTheme}
+        //theme={'dark'}
+        indentWithTab={true}
+        tabIndex={0}
+        extensions={[
+          extensions
+          //keymap.of([indentWithTab]),
+        ]}
         onChange={onChange}
+       // options={options}
+        
+        
+
       />
     );
   }
