@@ -9,6 +9,7 @@ import {
   FaFile,
   FaSave,
   FaUndo,
+  FaBug,
 } from "react-icons/fa";
 import { List } from "./List";
 import { Element } from "./Element";
@@ -33,6 +34,14 @@ export default function HeaderControl() {
   return (
     <Box display="flex" gap="1rem">
       <List>
+        <Element
+          onClick={() => {
+            ui.toggleDebuMode();
+          }}
+        >
+          <FaBug />
+        </Element>
+        <Separator />
         <Element>
           <FaSave></FaSave>
         </Element>

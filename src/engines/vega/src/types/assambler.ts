@@ -14,3 +14,5 @@ export interface EncodedInstruction {
   bin: number;
   meta: EncodedInstructionMeta;
 }
+
+export const rtype = ["add", "sub", "or", "and"];

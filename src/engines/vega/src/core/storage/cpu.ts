@@ -4,11 +4,31 @@ import { UICPUState } from "../../types/state";
 const initialState = {
   cycles: 0,
   pipeline: {
-    IF: "nop",
-    ID: "nop",
-    EX: "nop",
-    MEM: "nop",
-    WB: "nop",
+    IF: {
+      instruction: "",
+      imeta: {},
+      cumeta: {},
+    },
+    ID: {
+      instruction: "",
+      imeta: {},
+      cumeta: {},
+    },
+    EX: {
+      instruction: "",
+      imeta: {},
+      cumeta: {},
+    },
+    MEM: {
+      instruction: "",
+      imeta: {},
+      cumeta: {},
+    },
+    WB: {
+      instruction: "",
+      imeta: {},
+      cumeta: {},
+    },
   },
   fetch: {
     instruction: "",

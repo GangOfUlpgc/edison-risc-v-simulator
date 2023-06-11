@@ -10,7 +10,10 @@ import {
 } from "./components";
 import { CPUState, CPUMem } from "./storage";
 import { Assambler } from "./assambler";
-import { EncodedInstruction } from "@vega/types/assambler";
+import {
+  EncodedInstruction,
+  EncodedInstructionMeta,
+} from "@vega/types/assambler";
 
 /**
  * Vega engine
@@ -33,7 +36,10 @@ export default class Vega {
   pc = new PCRegister();
   manager = new CPUStateManager();
   controlUnit = new ControlUnit();
-  newInstruction = 0;
+  newInstruction: { value: number; meta?: EncodedInstructionMeta } = {
+    value: 0,
+    meta: {},
+  };
   assambler = new Assambler();
 
   loadProgram(program: string) {
@@ -54,7 +60,11 @@ export default class Vega {
     this.execute();
     this.decode();
     this.fetch();
-    this.manager.nextStep(this.newInstruction.toString());
+    const val = this.newInstruction?.value | 0;
+    this.manager.nextStep(
+      val.toString(16).padStart(8, "0"),
+      this.newInstruction.meta ?? {}
+    );
   }
 
   reload() {
@@ -64,12 +74,12 @@ export default class Vega {
   }
 
   fetch() {
-    const instruction = this.rom.read(this.pc.read()).value | 0;
+    const instruction = this.rom.read(this.pc.read());
     this.pc.plus4();
     this.newInstruction = instruction;
     this.manager.setState(() => ({
       fetch: {
-        instruction: instruction.toString(16),
+        instruction: (instruction?.value | 0).toString(16),
       },
     }));
   }
