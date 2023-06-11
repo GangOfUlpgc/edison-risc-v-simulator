@@ -12,7 +12,7 @@ export default function AluControl() {
         <Box backgroundColor="gray.200" height="100" bgColor="white" border='2px' borderColor='blue.200' borderRadius="40%" >
             <Box padding="2" py="6" fontSize="0.8rem" textAlign="center">Alu Control</Box>
             <Handle type="target" position={Position.Left} style={firstInOutStyle} id="input1" />
-
+            <Handle type="target" position={Position.Bottom} id="aluOp" />
             <Handle type="source" position={Position.Right} style={firstInOutStyle} id="output1" />
         </Box>
     )
