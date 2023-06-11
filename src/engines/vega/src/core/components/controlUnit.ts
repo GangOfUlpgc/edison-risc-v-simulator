@@ -1,4 +1,8 @@
-import { EncodedInstruction, rtype } from "@vega/types/assambler";
+import {
+  EncodedInstruction,
+  EncodedInstructionMeta,
+  rtype,
+} from "@vega/types/assambler";
 import { ControlUnitSignals } from "@vega/types/controlUnit";
 
 const controlMap: { [instruction: string]: ControlUnitSignals } = {
@@ -53,9 +57,11 @@ const controlMap: { [instruction: string]: ControlUnitSignals } = {
 };
 
 export class ControlUnit {
-  generateSignals(instruction: EncodedInstruction): ControlUnitSignals {
-    const aluOp = instruction?.meta?.aluOp ?? "";
-    if (aluOp in rtype) return controlMap["rtype"];
+  generateSignals(instruction: EncodedInstructionMeta): ControlUnitSignals {
+    const aluOp = instruction?.type ?? "";
+    console.log("this is aluop: " + aluOp);
+    console.log("is rtype : " + rtype.includes(aluOp));
+    if (rtype.includes(aluOp)) return controlMap["rtype"];
     return controlMap[aluOp];
   }
 }
