@@ -2,8 +2,23 @@ import { Edge, Node, Position } from "reactflow";
 
 const nodes: Node[] = [
   {
+    id: "controlUnit",
+    position: { x: 300, y: -300 },
+    type: "controlUnit",
+  },
+  {
+    id: "aluControl",
+    position: { x: 800, y: 700 },
+    type: "aluControl",
+  },
+  {
+    id: "branch",
+    position: { x: 1200, y: -200 },
+    type: "branch",
+  },
+  {
     id: "muxAlu",
-    position: { x: 750, y: 300 },
+    position: { x: 750, y: 291 },
     type: "mux",
     data: { label: "MUX" },
   },
@@ -24,6 +39,18 @@ const nodes: Node[] = [
     type: "adder",
     position: { x: -100, y: -100 },
     data: { label: "Add" },
+  },
+  {
+    id: 'add4node',
+    data: {
+      label: '+ 4',
+    },
+    style: {
+      width: 60, // Initial width of the node
+      height: 30, // Initial height of the node
+    },
+    sourcePosition: Position.Right,
+    position: { x: -250, y: -20 },
   },
   {
     id: "adderIdex",
@@ -47,7 +74,7 @@ const nodes: Node[] = [
   {
     id: "dataMemory",
     type: "datamem",
-    position: { x: 1200, y: 250 },
+    position: { x: 1200, y: 150 },
     data: { label: "DataMem" },
   },
   {
@@ -64,6 +91,32 @@ const nodes: Node[] = [
     data: { label: "Instruction Memory" },
   },
   {
+    id: 'immGen',
+    data: {
+      label: 'Imm Gen',
+    },
+    style: {
+      width: 90, // Initial width of the node
+      height: 30, // Initial height of the node
+    },
+    targetPosition: Position.Left,
+    sourcePosition: Position.Right,
+    position: { x: 300, y: 535 },
+  },
+  {
+    id: 'shiftLeft',
+    data: {
+      label: 'Shift Left 1',
+    },
+    style: {
+      width: 90, // Initial width of the node
+      height: 30, // Initial height of the node
+    },
+    targetPosition: Position.Left,
+    sourcePosition: Position.Right,
+    position: { x: 670, y: 130 },
+  },
+  {
     id: "ifid",
     type: "bufferifid",
     position: { x: 50, y: 100 },
@@ -72,7 +125,7 @@ const nodes: Node[] = [
   {
     id: "idex",
     type: "bufferidex",
-    position: { x: 500, y: 100 },
+    position: { x: 500, y: 50 },
     data: { label: "buffer id/ex" },
   },
   {
@@ -87,6 +140,97 @@ const nodes: Node[] = [
     position: { x: 1400, y: 100 },
     data: { label: "buffer mem/wb" },
   },
+
+  {
+    id: 'exNodeIdexBuffer',
+    data: {
+      label: 'EX',
+    },
+    style: {
+      border: "1px solid #48BB78",
+      fontSize: "0.5rem",
+      width: 36, // Initial width of the node
+      height: 30, // Initial height of the node
+    },
+    targetPosition: Position.Left,
+    sourcePosition: Position.Right,
+    position: { x: 500, y: 30 },
+  },
+  {
+    id: 'mNodeIdexBuffer',
+    data: {
+      label: 'M',
+    },
+    style: {
+      border: "1px solid #48BB78",
+      fontSize: "0.5rem",
+      width: 36, // Initial width of the node
+      height: 30, // Initial height of the node
+    },
+    targetPosition: Position.Left,
+    sourcePosition: Position.Right,
+    position: { x: 500, y: 0 },
+  },
+  {
+    id: 'wbNodeIdexBuffer',
+    data: {
+      label: 'WB',
+    },
+    style: {
+      border: "1px solid #48BB78",
+      fontSize: "0.5rem",
+      width: 36, // Initial width of the node
+      height: 30, // Initial height of the node
+    },
+    targetPosition: Position.Left,
+    sourcePosition: Position.Right,
+    position: { x: 500, y: -30 },
+  },
+  {
+    id: 'mNodeExmemBuffer',
+    data: {
+      label: 'M',
+    },
+    style: {
+      border: "1px solid #805AD5",
+      fontSize: "0.5rem",
+      width: 39, // Initial width of the node
+      height: 30, // Initial height of the node
+    },
+    targetPosition: Position.Left,
+    sourcePosition: Position.Right,
+    position: { x: 1000, y: 70 },
+  },
+  {
+    id: 'wbNodeExmemBuffer',
+    data: {
+      label: 'WB',
+    },
+    style: {
+      border: "1px solid #805AD5",
+      fontSize: "0.5rem",
+      width: 39, // Initial width of the node
+      height: 30, // Initial height of the node
+    },
+    targetPosition: Position.Left,
+    sourcePosition: Position.Right,
+    position: { x: 1000, y: 40 },
+  },
+  {
+    id: 'wbNodeMemwbBuffer',
+    data: {
+      label: 'WB',
+    },
+    style: {
+      border: "1px solid #E53E3E",
+      fontSize: "0.5rem",
+      width: 44, // Initial width of the node
+      height: 30, // Initial height of the node
+    },
+    targetPosition: Position.Left,
+    sourcePosition: Position.Right,
+    position: { x: 1400, y: 70 },
+  },
 ];
 const edges: Edge[] = [
   {
@@ -94,6 +238,10 @@ const edges: Edge[] = [
     source: "pc",
     target: "instructionMemory",
     label: "0x00000000",
+    type: "horizontal",
+    data: {
+      offsetx: 59,
+    },
     sourceHandle: "output",
     targetHandle: "address",
   },
@@ -110,7 +258,7 @@ const edges: Edge[] = [
     target: "ifid",
     type: "horizontal",
     data: {
-      offsetx: 20,
+      offsetx: 59,
     },
     sourceHandle: "output",
     targetHandle: "input1",
@@ -141,13 +289,24 @@ const edges: Edge[] = [
     sourceHandle: "readInstr",
     targetHandle: "input2",
   },
-
+  {
+    id: "e1-7",
+    source: "add4node",
+    target: "adder",
+    sourceHandle: "1",
+    targetHandle: "input2",
+  },
   {
     id: "e2-1",
     source: "ifid",
     target: "registers",
     sourceHandle: "output2",
     targetHandle: "readReg1",
+    type: "horizontal",
+    data: {
+      offsetx: 50,
+    },
+    
   },
   {
     id: "e2-2",
@@ -155,6 +314,10 @@ const edges: Edge[] = [
     target: "registers",
     sourceHandle: "output2",
     targetHandle: "readReg2",
+    type: "horizontal",
+    data: {
+      offsetx: 50,
+    },
   },
   {
     id: "e2-3",
@@ -162,6 +325,10 @@ const edges: Edge[] = [
     target: "idex",
     sourceHandle: "output1",
     targetHandle: "input1",
+    type: "horizontal",
+    data: {
+      offsetx: 70,
+    },
   },
   {
     id: "e2-4",
@@ -170,6 +337,10 @@ const edges: Edge[] = [
     sourceHandle: "output2",
     targetHandle: "input5",
     label: "instruction",
+    type: "horizontal",
+    data: {
+      offsetx: 50,
+    },
   },
   {
     id: "e2-5",
@@ -177,6 +348,10 @@ const edges: Edge[] = [
     target: "idex",
     sourceHandle: "output2",
     targetHandle: "input4",
+    type: "horizontal",
+    data: {
+      offsetx: 50,
+    },
   },
   {
     id: "e2-6",
@@ -192,7 +367,36 @@ const edges: Edge[] = [
     sourceHandle: "readData2",
     targetHandle: "input3",
   },
-
+  {
+    id: "e2-8",
+    source: "ifid",
+    target: "immGen",
+    sourceHandle: "output2",
+    targetHandle: "1",
+    type: "horizontal",
+    data: {
+      offsetx: 50,
+    },
+  },
+  {
+    id: "e2-9",
+    source: "immGen",
+    target: "idex",
+    sourceHandle: "1",
+    targetHandle: "input6",
+    
+  },
+  {
+    id: "e2-10",
+    source: "ifid",
+    target: "controlUnit",
+    sourceHandle: "output2",
+    targetHandle: "input1",
+    type: "horizontal",
+    data: {
+      offsetx: 50,
+    },
+  },
   {
     id: "e3-1",
     source: "idex",
@@ -201,69 +405,136 @@ const edges: Edge[] = [
     targetHandle: "input1",
   },
   {
-    id: "e3-4",
+    id: "e3-2",
     source: "idex",
     target: "adderIdex",
     sourceHandle: "output1",
     targetHandle: "input1",
+    type: "horizontal",
+    data: {
+      offsetx: 50
+    }
   },
   {
-    id: "e3-2",
+    id: "e3-3",
     source: "idex",
     target: "muxAlu",
     sourceHandle: "output3",
     targetHandle: "input1",
   },
   {
-    id: "e3-3",
+    id: "e3-4",
     source: "idex",
     target: "exmem",
     sourceHandle: "output3",
     targetHandle: "input3",
-  },
-  {
-    id: "e3-4",
-    source: "idex",
-    target: "muxAlu",
-    sourceHandle: "output4",
-    targetHandle: "input2",
+    type: "horizontal",
+    data: {
+      offsetx: 50,
+    }
   },
   {
     id: "e3-5",
     source: "idex",
-    target: "adderIdex",
+    target: "muxAlu",
     sourceHandle: "output4",
     targetHandle: "input2",
+    type: "horizontal",
+    data: {
+      offsetx: 120,
+    }
   },
   {
     id: "e3-6",
+    source: "idex",
+    target: "shiftLeft",
+    sourceHandle: "output4",
+    targetHandle: "1",
+    type: "horizontal",
+    data: {
+      offsetx: 80
+    }
+  },
+  {
+    id: "e3-7",
     source: "muxAlu",
     target: "alu",
     sourceHandle: "output",
     targetHandle: "input2",
   },
   {
-    id: "e3-7",
+    id: "e3-8",
     source: "alu",
     target: "exmem",
     sourceHandle: "output",
     targetHandle: "input2",
   },
   {
-    id: "e3-8",
+    id: "e3-9",
     source: "adderIdex",
     target: "exmem",
     sourceHandle: "output",
     targetHandle: "input1",
   },
   {
-    id: "e3-9",
+    id: "e3-10",
     source: "idex",
     target: "exmem",
     sourceHandle: "output5",
     targetHandle: "input4",
+    type: "horizontal",
+    data: {
+      offsetx: 30
+    }
   },
-
+  {
+    id: "e3-11",
+    source: "shiftLeft",
+    target: "adderIdex",
+    sourceHandle: "1",
+    targetHandle: "input2",
+  },
+  {
+    id: "e3-12",
+    source: "idex",
+    target: "aluControl",
+    sourceHandle: "output6",
+    targetHandle: "1",
+    type: "horizontal",
+    data: {
+      offsetx: 30
+    },
+    style: { stroke: '#4299e1a6' }
+  },
+  {
+    id: "e3-13",
+    source: "aluControl",
+    target: "alu",
+    sourceHandle: "1",
+    targetHandle: "selector",
+    style: { stroke: '#4299e1a6' }
+  },
+  {
+    id: "e3-14",
+    source: "idex",
+    target: "aluControl",
+    sourceHandle: "output6",
+    targetHandle: "input1",
+    type: "horizontal",
+    data: {
+      offsetx: 15,
+    }
+  },
+  {
+    id: "e3-14",
+    source: "alu",
+    target: "exmem",
+    sourceHandle: "zero",
+    targetHandle: "zero",
+    style: {
+      stroke: '#4299e1a6'
+    }
+  },
   {
     id: "e4-1",
     source: "exmem",
@@ -283,6 +554,10 @@ const edges: Edge[] = [
     target: "dataMemory",
     sourceHandle: "output2",
     targetHandle: "address",
+    type: "horizontal",
+    data: {
+      offsetx: 50
+    }
   },
   {
     id: "e4-3",
@@ -319,6 +594,10 @@ const edges: Edge[] = [
     target: "muxWb",
     sourceHandle: "output1",
     targetHandle: "input1",
+    type: "horizontal",
+    data: {
+      offsetx: 100
+    }
   },
   {
     id: "e5-2",
@@ -332,8 +611,8 @@ const edges: Edge[] = [
 
     type: "custom",
     data: {
-      offsetx: 70,
-      offsety: 120,
+      offsetx: 50,
+      offsety: 130,
     },
     source: "memwb",
     target: "registers",
@@ -344,7 +623,7 @@ const edges: Edge[] = [
     id: "e5-4",
     type: "custom",
     data: {
-      offsetx: 50,
+      offsetx: 40,
       offsety: 100,
     },
     source: "muxWb",
@@ -352,6 +631,184 @@ const edges: Edge[] = [
     sourceHandle: "output",
     targetHandle: "writeData",
     label: "WB Data",
+  },
+  {
+    id: "c1",
+    source: "controlUnit",
+    target: "exNodeIdexBuffer",
+    sourceHandle: "output1",
+    targetHandle: "1",
+    type: "horizontal",
+    data: {
+      offsetx: 30
+    },
+    style: { stroke: '#4299e1a6' }
+  },
+  {
+    id: "c2",
+    source: "controlUnit",
+    target: "mNodeIdexBuffer",
+    sourceHandle: "output1",
+    targetHandle: "1",
+    type: "horizontal",
+    data: {
+      offsetx: 30
+    },
+    style: { stroke: '#4299e1a6' }
+  },
+  {
+    id: "c3",
+    source: "controlUnit",
+    target: "wbNodeIdexBuffer",
+    sourceHandle: "output1",
+    targetHandle: "1",
+    type: "horizontal",
+    data: {
+      offsetx: 30
+    },
+    style: { stroke: '#4299e1a6' }
+  },
+  {
+    id: "c4",
+    source: "mNodeIdexBuffer",
+    target: "mNodeExmemBuffer",
+    sourceHandle: "1",
+    targetHandle: "1",
+    type: "horizontal",
+    data: {
+      offsetx: 400
+    },
+    style: { stroke: '#4299e1a6' }
+  },
+  {
+    id: "c5",
+    source: "wbNodeIdexBuffer",
+    target: "wbNodeExmemBuffer",
+    sourceHandle: "1",
+    targetHandle: "1",
+    type: "horizontal",
+    data: {
+      offsetx: 430
+    },
+    style: { stroke: '#4299e1a6' }
+  },
+  {
+    id: "c6",
+    source: "wbNodeExmemBuffer",
+    target: "wbNodeMemwbBuffer",
+    sourceHandle: "1",
+    targetHandle: "1",
+    type: "horizontal",
+    data: {
+      offsetx: 250
+    },
+    style: { stroke: '#4299e1a6' }
+  },
+  {
+    id: "c7",
+    source: "wbNodeMemwbBuffer",
+    target: "registers",
+    sourceHandle: "1",
+    targetHandle: "selector",
+    type: "custom",
+    data: {
+      offsetx: 70,
+      offsety: -400,
+    },
+    style: { stroke: '#4299e1a6' }
+  },
+  {
+    id: "c8",
+    source: "wbNodeMemwbBuffer",
+    target: "muxWb",
+    sourceHandle: "1",
+    targetHandle: "selector",
+    type: "horizontal",
+    data: {
+      offsetx: 60,
+    },
+    style: { stroke: '#4299e1a6' }
+  },
+  {
+    id: "c9",
+    source: "exNodeIdexBuffer",
+    target: "muxAlu",
+    sourceHandle: "1",
+    targetHandle: "selector",
+    type: "horizontal",
+    data: {
+      offsetx: 70,
+    },
+    style: { stroke: '#4299e1a6' }
+  },
+  {
+    id: "c9",
+    source: "exNodeIdexBuffer",
+    target: "aluControl",
+    sourceHandle: "1",
+    targetHandle: "aluOp",
+    type: "horizontal",
+    data: {
+      offsetx: 70,
+    },
+    style: { stroke: '#4299e1a6' }
+  },
+  {
+    id: "c10",
+    source: "mNodeExmemBuffer",
+    target: "dataMemory",
+    sourceHandle: "1",
+    targetHandle: "memRead",
+    style: { stroke: '#4299e1a6' }
+  },
+  {
+    id: "c11",
+    source: "mNodeExmemBuffer",
+    target: "dataMemory",
+    sourceHandle: "1",
+    targetHandle: "memWrite",
+    type: "horizontal",
+    data: {
+      offsetx: 40,
+    },
+    style: { stroke: '#4299e1a6' }
+  },
+  {
+    id: "c12",
+    source: "mNodeExmemBuffer",
+    target: "branch",
+    sourceHandle: "1",
+    targetHandle: "input1",
+    type: "horizontal",
+    data: {
+      offsetx: 10,
+    },
+    style: { stroke: '#4299e1a6' }
+  },
+  {
+    id: "c13",
+    source: "exmem",
+    target: "branch",
+    sourceHandle: "zero",
+    targetHandle: "input2",
+    type: "horizontal",
+    data: {
+      offsetx: 20,
+    },
+    style: { stroke: '#4299e1a6' }
+  },
+  {
+    id: "c14",
+    source: "branch",
+    target: "muxPc",
+    sourceHandle: "output",
+    targetHandle: "selector",
+    type: "custom",
+    data: {
+      offsetx: 50,
+      offsety: -200,
+    },
+    style: { stroke: '#4299e1a6' }
   },
 ];
 
