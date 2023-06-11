@@ -17,6 +17,7 @@ export default function Registers() {
       <Handle type="target" position={Position.Left} style={secondReadRegStyle} id="readReg2" />
       <Handle type="target" position={Position.Left} style={writeRegStyle} id="writeReg" />
       <Handle type="target" position={Position.Left} style={writeDataStyle} id="writeData" />
+      <Handle type="target" position={Position.Top} id="selector" />
       <Handle type="source" position={Position.Right} style={firstReadDataStyle} id="readData1" />
       <Handle type="source" position={Position.Right} style={secondReadDataStyle} id="readData2" />
     </Box>
