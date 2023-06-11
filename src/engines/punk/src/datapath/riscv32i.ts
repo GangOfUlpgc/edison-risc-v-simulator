@@ -3,7 +3,7 @@ import { Edge, Node, Position } from "reactflow";
 const nodes: Node[] = [
   {
     id: "muxAlu",
-    position: { x: 750, y: 300 },
+    position: { x: 750, y: 291 },
     type: "mux",
     data: { label: "MUX" },
   },
@@ -24,6 +24,18 @@ const nodes: Node[] = [
     type: "adder",
     position: { x: -100, y: -100 },
     data: { label: "Add" },
+  },
+  {
+    id: 'add4node',
+    data: {
+      label: '+ 4',
+    },
+    style: {
+      width: 60, // Initial width of the node
+      height: 30, // Initial height of the node
+    },
+    sourcePosition: Position.Right,
+    position: { x: -250, y: -20 },
   },
   {
     id: "adderIdex",
@@ -47,7 +59,7 @@ const nodes: Node[] = [
   {
     id: "dataMemory",
     type: "datamem",
-    position: { x: 1200, y: 250 },
+    position: { x: 1200, y: 150 },
     data: { label: "DataMem" },
   },
   {
@@ -62,6 +74,32 @@ const nodes: Node[] = [
     type: "instrMemory",
     position: { x: -100, y: 250 },
     data: { label: "Instruction Memory" },
+  },
+  {
+    id: 'immGen',
+    data: {
+      label: 'Imm Gen',
+    },
+    style: {
+      width: 90, // Initial width of the node
+      height: 30, // Initial height of the node
+    },
+    targetPosition: Position.Left,
+    sourcePosition: Position.Right,
+    position: { x: 300, y: 535 },
+  },
+  {
+    id: 'shiftLeft',
+    data: {
+      label: 'Shift Left 1',
+    },
+    style: {
+      width: 90, // Initial width of the node
+      height: 30, // Initial height of the node
+    },
+    targetPosition: Position.Left,
+    sourcePosition: Position.Right,
+    position: { x: 670, y: 130 },
   },
   {
     id: "ifid",
@@ -94,6 +132,10 @@ const edges: Edge[] = [
     source: "pc",
     target: "instructionMemory",
     label: "0x00000000",
+    type: "horizontal",
+    data: {
+      offsetx: 59,
+    },
     sourceHandle: "output",
     targetHandle: "address",
   },
@@ -110,7 +152,7 @@ const edges: Edge[] = [
     target: "ifid",
     type: "horizontal",
     data: {
-      offsetx: 20,
+      offsetx: 59,
     },
     sourceHandle: "output",
     targetHandle: "input1",
@@ -141,13 +183,24 @@ const edges: Edge[] = [
     sourceHandle: "readInstr",
     targetHandle: "input2",
   },
-
+  {
+    id: "e1-7",
+    source: "add4node",
+    target: "adder",
+    sourceHandle: "1",
+    targetHandle: "input2",
+  },
   {
     id: "e2-1",
     source: "ifid",
     target: "registers",
     sourceHandle: "output2",
     targetHandle: "readReg1",
+    type: "horizontal",
+    data: {
+      offsetx: 50,
+    },
+    
   },
   {
     id: "e2-2",
@@ -155,6 +208,10 @@ const edges: Edge[] = [
     target: "registers",
     sourceHandle: "output2",
     targetHandle: "readReg2",
+    type: "horizontal",
+    data: {
+      offsetx: 50,
+    },
   },
   {
     id: "e2-3",
@@ -162,6 +219,10 @@ const edges: Edge[] = [
     target: "idex",
     sourceHandle: "output1",
     targetHandle: "input1",
+    type: "horizontal",
+    data: {
+      offsetx: 50,
+    },
   },
   {
     id: "e2-4",
@@ -170,6 +231,10 @@ const edges: Edge[] = [
     sourceHandle: "output2",
     targetHandle: "input5",
     label: "instruction",
+    type: "horizontal",
+    data: {
+      offsetx: 50,
+    },
   },
   {
     id: "e2-5",
@@ -177,6 +242,10 @@ const edges: Edge[] = [
     target: "idex",
     sourceHandle: "output2",
     targetHandle: "input4",
+    type: "horizontal",
+    data: {
+      offsetx: 50,
+    },
   },
   {
     id: "e2-6",
@@ -192,7 +261,25 @@ const edges: Edge[] = [
     sourceHandle: "readData2",
     targetHandle: "input3",
   },
-
+  {
+    id: "e2-8",
+    source: "ifid",
+    target: "immGen",
+    sourceHandle: "output2",
+    targetHandle: "1",
+    type: "horizontal",
+    data: {
+      offsetx: 50,
+    },
+  },
+  {
+    id: "e2-9",
+    source: "immGen",
+    target: "idex",
+    sourceHandle: "1",
+    targetHandle: "input6",
+    
+  },
   {
     id: "e3-1",
     source: "idex",
@@ -206,6 +293,10 @@ const edges: Edge[] = [
     target: "adderIdex",
     sourceHandle: "output1",
     targetHandle: "input1",
+    type: "horizontal",
+    data: {
+      offsetx: 50
+    }
   },
   {
     id: "e3-2",
@@ -220,6 +311,10 @@ const edges: Edge[] = [
     target: "exmem",
     sourceHandle: "output3",
     targetHandle: "input3",
+    type: "horizontal",
+    data: {
+      offsetx: 50,
+    }
   },
   {
     id: "e3-4",
@@ -227,13 +322,21 @@ const edges: Edge[] = [
     target: "muxAlu",
     sourceHandle: "output4",
     targetHandle: "input2",
+    type: "horizontal",
+    data: {
+      offsetx: 100,
+    }
   },
   {
     id: "e3-5",
     source: "idex",
-    target: "adderIdex",
+    target: "shiftLeft",
     sourceHandle: "output4",
-    targetHandle: "input2",
+    targetHandle: "1",
+    type: "horizontal",
+    data: {
+      offsetx: 100
+    }
   },
   {
     id: "e3-6",
@@ -262,8 +365,18 @@ const edges: Edge[] = [
     target: "exmem",
     sourceHandle: "output5",
     targetHandle: "input4",
+    type: "horizontal",
+    data: {
+      offsetx: 50
+    }
   },
-
+  {
+    id: "e3-10",
+    source: "shiftLeft",
+    target: "adderIdex",
+    sourceHandle: "1",
+    targetHandle: "input2",
+  },
   {
     id: "e4-1",
     source: "exmem",
@@ -283,6 +396,10 @@ const edges: Edge[] = [
     target: "dataMemory",
     sourceHandle: "output2",
     targetHandle: "address",
+    type: "horizontal",
+    data: {
+      offsetx: 50
+    }
   },
   {
     id: "e4-3",
@@ -319,6 +436,10 @@ const edges: Edge[] = [
     target: "muxWb",
     sourceHandle: "output1",
     targetHandle: "input1",
+    type: "horizontal",
+    data: {
+      offsetx: 100
+    }
   },
   {
     id: "e5-2",
@@ -332,8 +453,8 @@ const edges: Edge[] = [
 
     type: "custom",
     data: {
-      offsetx: 70,
-      offsety: 120,
+      offsetx: 50,
+      offsety: 130,
     },
     source: "memwb",
     target: "registers",
@@ -344,7 +465,7 @@ const edges: Edge[] = [
     id: "e5-4",
     type: "custom",
     data: {
-      offsetx: 50,
+      offsetx: 40,
       offsety: 100,
     },
     source: "muxWb",
