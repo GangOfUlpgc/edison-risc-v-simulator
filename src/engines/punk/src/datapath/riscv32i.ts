@@ -39,6 +39,7 @@ const nodes: Node[] = [
   },
   {
     id: "alu",
+
     type: "alu",
     position: { x: 900, y: 225 },
     data: { label: "Alu" },
@@ -107,11 +108,20 @@ const edges: Edge[] = [
     id: "e1-3",
     source: "pc",
     target: "ifid",
+    type: "horizontal",
+    data: {
+      offsetx: 20,
+    },
     sourceHandle: "output",
     targetHandle: "input1",
   },
   {
     id: "e1-4",
+    type: "custom",
+    data: {
+      offsetx: 70,
+      offsety: -100,
+    },
     source: "adder",
     target: "muxPc",
     sourceHandle: "output",
@@ -258,6 +268,12 @@ const edges: Edge[] = [
     id: "e4-1",
     source: "exmem",
     target: "muxPc",
+    type: "custom",
+    data: {
+      offsetx: 100,
+      offsety: -320,
+    },
+
     sourceHandle: "output1",
     targetHandle: "input2",
   },

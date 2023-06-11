@@ -1,11 +1,34 @@
+import { EncodedInstructionMeta } from "./assambler";
+import { ControlUnitSignals } from "./controlUnit";
+
 export interface UICPUState {
   cycles: number;
   pipeline: {
-    IF: string;
-    ID: string;
-    EX: string;
-    MEM: string;
-    WB: string;
+    IF: {
+      instruction: string;
+      imeta: Partial<EncodedInstructionMeta>;
+      cumeta: Partial<ControlUnitSignals>;
+    };
+    ID: {
+      instruction: string;
+      imeta: Partial<EncodedInstructionMeta>;
+      cumeta: Partial<ControlUnitSignals>;
+    };
+    EX: {
+      instruction: string;
+      imeta: Partial<EncodedInstructionMeta>;
+      cumeta: Partial<ControlUnitSignals>;
+    };
+    MEM: {
+      instruction: string;
+      imeta: Partial<EncodedInstructionMeta>;
+      cumeta: Partial<ControlUnitSignals>;
+    };
+    WB: {
+      instruction: string;
+      imeta: Partial<EncodedInstructionMeta>;
+      cumeta: Partial<ControlUnitSignals>;
+    };
   };
   fetch: {
     instruction: string;
