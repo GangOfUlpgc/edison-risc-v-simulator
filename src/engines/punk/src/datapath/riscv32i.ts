@@ -2,6 +2,16 @@ import { Edge, Node, Position } from "reactflow";
 
 const nodes: Node[] = [
   {
+    id: "controlUnit",
+    position: { x: 400, y: -300 },
+    type: "controlUnit",
+  },
+  {
+    id: "aluControl",
+    position: { x: 800, y: 700 },
+    type: "controlUnit",
+  },
+  {
     id: "muxAlu",
     position: { x: 750, y: 291 },
     type: "mux",
