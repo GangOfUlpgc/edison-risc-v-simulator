@@ -3,9 +3,9 @@ import React from "react";
 import { Handle, Position } from "reactflow";
 
 const firstInOutStyle = { top: 50 }
-const secondInOutStyle = { top: 150 }
-const thirdInOutStyle = { top: 250 }
-const fourthInOutStyle = { top: 350 }
+const secondInOutStyle = { top: 250 }
+const thirdInOutStyle = { top: 350 }
+const fourthInOutStyle = { top: 450 }
 
 export default function BufferExMem() {
     return (
