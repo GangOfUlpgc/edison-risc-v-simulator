@@ -327,7 +327,7 @@ const edges: Edge[] = [
     targetHandle: "input1",
     type: "horizontal",
     data: {
-      offsetx: 50,
+      offsetx: 70,
     },
   },
   {
@@ -385,6 +385,17 @@ const edges: Edge[] = [
     sourceHandle: "1",
     targetHandle: "input6",
     
+  },
+  {
+    id: "e2-10",
+    source: "ifid",
+    target: "controlUnit",
+    sourceHandle: "output2",
+    targetHandle: "input1",
+    type: "horizontal",
+    data: {
+      offsetx: 50,
+    },
   },
   {
     id: "e3-1",
