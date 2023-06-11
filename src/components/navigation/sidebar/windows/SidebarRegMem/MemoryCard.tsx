@@ -20,14 +20,15 @@ function MemoryCardElement({ address }: props) {
   const rom = rv32i.useMem((state) => state.rom);
   const pc = rv32i.useMem((state) => state.pc);
   const value = rom[address]?.value | 0;
+  const pipeline = rv32i.useState((state) => state.pipeline);
   const status = getStatus();
 
   function getStatus() {
-    if (pc == address) return "fetch";
-    if (pc == address + 4) return "decode";
-    if (pc == address + 8) return "execute";
-    if (pc == address + 12) return "memory";
-    if (pc == address + 16) return "writeback";
+    if (address == pipeline.IF.cpumeta?.pc) return "fetch";
+    if (address == pipeline?.ID?.cpumeta?.pc) return "decode";
+    if (address == pipeline?.EX?.cpumeta?.pc) return "execute";
+    if (address == pipeline?.MEM?.cpumeta?.pc) return "memory";
+    if (address == pipeline?.WB?.cpumeta?.pc) return "writeback";
     return "idle";
   }
 

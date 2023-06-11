@@ -14,6 +14,9 @@ import {
   EncodedInstruction,
   EncodedInstructionMeta,
 } from "@vega/types/assambler";
+import { State } from "xstate";
+import { ControlUnitSignals } from "@vega/types/controlUnit";
+import { AluControlUnit } from "./components/aluControlUnit";
 
 /**
  * Vega engine
@@ -36,10 +39,7 @@ export default class Vega {
   pc = new PCRegister();
   manager = new CPUStateManager();
   controlUnit = new ControlUnit();
-  newInstruction: { value: number; meta?: EncodedInstructionMeta } = {
-    value: 0,
-    meta: {},
-  };
+  aluControlUnit = new AluControlUnit();
   assambler = new Assambler();
 
   loadProgram(program: string) {
@@ -55,16 +55,11 @@ export default class Vega {
   }
 
   next() {
-    this.writeback();
-    this.mem();
-    this.execute();
-    this.decode();
     this.fetch();
-    const val = this.newInstruction?.value | 0;
-    this.manager.nextStep(
-      val.toString(16).padStart(8, "0"),
-      this.newInstruction.meta ?? {}
-    );
+    this.decode();
+    this.execute();
+    this.mem();
+    this.writeback();
   }
 
   reload() {
@@ -74,48 +69,151 @@ export default class Vega {
   }
 
   fetch() {
+    const exmem = CPUState.getState().pipeline.MEM;
+    if ((exmem.cumeta?.Branch ?? 0) === 1 && exmem.cpumeta.ALUOut === 0) {
+      this.pc.write(exmem.cpumeta.jumpDir ?? 0);
+    }
     const instruction = this.rom.read(this.pc.read());
+    const val = instruction?.value ?? 0;
+    this.manager.nextStep(
+      val.toString(16).padStart(8, "0"),
+      instruction?.meta ?? {},
+      this.pc.read() ?? 0
+    );
     this.pc.plus4();
-    this.newInstruction = instruction;
-    this.manager.setState(() => ({
-      fetch: {
-        instruction: (instruction?.value | 0).toString(16),
-      },
-    }));
   }
 
   decode() {
     //DECODIFICAR LA INSTRUCCION Y GUARDARLA
+    const meta = CPUState.getState().pipeline.ID;
+    console.log(meta);
 
-    const rs1 = 0;
-    const rs2 = 0;
+    const rs1 = meta.imeta.rs ?? 0;
+    const rs2 = meta.imeta.rt ?? 0;
     const inmm = 0;
 
     const val1 = this.registers.read(rs1);
     const val2 = this.registers.read(rs2);
 
+    let cusignals: ControlUnitSignals;
+
+    try {
+      cusignals = this.controlUnit.generateSignals(meta.imeta);
+    } catch {
+      console.log("there are no meta");
+    }
+
     this.manager.setState((state) => ({
-      decode: {
-        instruction: this.manager.getState().fetch.instruction,
-        rs1: rs1,
-        rs2: rs2,
-        rs1Value: val1,
-        rs2Value: val2,
-        inmm: inmm,
+      pipeline: {
+        ...state.pipeline,
+        ID: {
+          ...state.pipeline.ID,
+          cumeta: cusignals,
+          cpumeta: {
+            ...state.pipeline.ID.cpumeta,
+            rs1: rs1,
+            rs2: rs2,
+            rs1Value: val1,
+            rs2Value: val2,
+            inmm: inmm,
+          },
+        },
       },
     }));
   }
 
   execute() {
-    console.log("execute");
+    const pipe = CPUState.getState().pipeline.EX;
+
+    const aluCtrl = this.aluControlUnit.getAluOp(
+      pipe?.imeta?.type ?? "",
+      pipe.cumeta?.ALUop ?? 0
+    );
+
+    let B = 0;
+
+    if ((pipe.cumeta?.ALUsrc ?? 0) == 0) {
+      B = pipe.cpumeta?.rs2Value ?? 0;
+    } else {
+      B = pipe.cpumeta.inmm ?? 0;
+    }
+
+    const ALUOut = this.alu.next({
+      A: pipe.cpumeta?.rs1Value ?? 0,
+      B,
+      op: aluCtrl ?? 0,
+    });
+
+    const jumpDir = (pipe.cpumeta?.pc ?? 0) + (pipe.cpumeta.inmm ?? 0) * 2;
+
+    this.manager.setState((state) => ({
+      pipeline: {
+        ...state.pipeline,
+        EX: {
+          ...state.pipeline.EX,
+          cpumeta: {
+            ...state.pipeline.EX.cpumeta,
+            aluCtrl: aluCtrl,
+            ALUOut,
+            jumpDir,
+          },
+        },
+      },
+    }));
   }
 
   mem() {
-    console.log("mem");
+    const pipe = CPUState.getState().pipeline.MEM;
+    let readedData = 0;
+
+    if (pipe.cumeta?.MemRead) {
+      readedData = this.ram.read(pipe.cpumeta.ALUOut ?? 0);
+    }
+
+    if (pipe.cumeta?.MemWrite) {
+      this.ram.write(pipe.cpumeta.ALUOut ?? 0, pipe.cpumeta.rs2Value ?? 0);
+    }
+
+    this.manager.setState((state) => ({
+      pipeline: {
+        ...state.pipeline,
+        MEM: {
+          ...state.pipeline.MEM,
+          cpumeta: {
+            ...state.pipeline.MEM.cpumeta,
+            WriteData: pipe.cpumeta.rs2Value ?? 0,
+            ReadData: readedData,
+          },
+        },
+      },
+    }));
   }
 
   writeback() {
-    console.log("writeback");
+    const pipe = CPUState.getState().pipeline.WB;
+    let writeData = 0;
+
+    if (pipe.cumeta.RegWrite) {
+      console.log("MEMTOREG: ", pipe.cumeta.MemToReg);
+      writeData =
+        ((pipe.cumeta.MemToReg ?? 0) == 0
+          ? pipe.cpumeta.ALUOut
+          : pipe.cpumeta.ReadData) ?? 0;
+      this.registers.write(pipe.imeta?.rd ?? 0, writeData);
+    }
+
+    this.manager.setState((state) => ({
+      pipeline: {
+        ...state.pipeline,
+        WB: {
+          ...state.pipeline.WB,
+          cpumeta: {
+            ...state.pipeline.WB.cpumeta,
+            WriteRegister: writeData,
+          },
+        },
+      },
+    }));
   }
 
   get useMem() {

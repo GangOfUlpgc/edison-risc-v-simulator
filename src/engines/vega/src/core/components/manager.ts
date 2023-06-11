@@ -18,7 +18,7 @@ export class CPUStateManager {
     CPUState.getState().reset();
   }
 
-  nextStep(instruction: string, meta: EncodedInstructionMeta) {
+  nextStep(instruction: string, meta: EncodedInstructionMeta, pc: number) {
     CPUState.setState((state) => ({
       pipeline: {
         ...state.pipeline,
@@ -38,6 +38,9 @@ export class CPUStateManager {
           instruction: instruction,
           imeta: meta,
           cumeta: {},
+          cpumeta: {
+            pc,
+          },
         },
       },
     }));
