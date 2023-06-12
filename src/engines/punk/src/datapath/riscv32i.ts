@@ -1,20 +1,25 @@
+import { UICPUState } from "@vega/types/state";
 import { Edge, Node, Position } from "reactflow";
+import { rv32i } from "../../../../../cpus";
 
 const nodes: Node[] = [
   {
     id: "controlUnit",
     position: { x: 300, y: -300 },
     type: "controlUnit",
+    data: {},
   },
   {
     id: "aluControl",
     position: { x: 800, y: 700 },
     type: "aluControl",
+    data: {},
   },
   {
     id: "branch",
     position: { x: 1200, y: -200 },
     type: "branch",
+    data: {},
   },
   {
     id: "muxAlu",
@@ -38,7 +43,10 @@ const nodes: Node[] = [
     id: "adder",
     type: "adder",
     position: { x: -100, y: -100 },
-    data: { label: "Add" },
+    data: {
+      label: "Add",
+      query: (state: UICPUState) => (state.pipeline.IF.cpumeta?.pc ?? 0) + 4,
+    },
   },
   {
     id: "add4node",
