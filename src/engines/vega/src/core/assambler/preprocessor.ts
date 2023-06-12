@@ -5,27 +5,22 @@ export class Preprocessor {
 
   preprocess(program: string): string[] {
     const result: string[] = [];
-    const lineas = program.split("\n");
+    let lineas = program.split("\n");
 
-    this.globltreat(lineas[0]);
+    lineas = this.globltreat(lineas)
 
-    for (let i = 0; i < lineas.length; i++) {
-      let elemento = lineas[i];
+    for (this.i; this.i < lineas.length; this.i++) {
+      let elemento = lineas[this.i];
       elemento = elemento.trimStart();
       elemento = elemento.trimEnd();
-      const isLabel: boolean = this.IsLabel(elemento);
-      if (isLabel) {
-        elemento = elemento.slice(0, -1);
-        this.etiquetas[elemento] = this.instructions + 1;
-      } else {
-        const IsJump = this.IsBranch(elemento);
-        if (IsJump) {
+      const IsJump = this.IsBranch(elemento);
+      if (IsJump) {
           //Transformar BEQ
-          elemento = this.cambiofinal(elemento);
-        }
-        this.instructions++;
-        result.push(elemento);
+      elemento = this.cambiofinal(elemento);
       }
+      this.instructions++;
+      result.push(elemento);
+      
     }
     return result;
   }
@@ -58,10 +53,22 @@ export class Preprocessor {
     return nuevoTexto;
   }
 
-  globltreat(instrucc: string) {
-    const words = instrucc.split(" ");
-    if (words[0] == ".globl") {
-      this.i = 1;
+  globltreat(instruccs: string[]) {
+    let pivot = -1
+    for (let j = 0; j < instruccs.length; j++) {
+      let instruc = instruccs[j];
+      instruc = instruc.trimStart();
+      instruc = instruc.trimEnd();
+      const isLabel: boolean = this.IsLabel(instruc);
+      if(isLabel) {
+        instruc = instruc.slice(0, -1);
+        this.etiquetas[instruc] = pivot + 1;
+        instruccs.splice(j, 1);
+      } else {
+        pivot++;
+      }
+
     }
+    return instruccs
   }
 }

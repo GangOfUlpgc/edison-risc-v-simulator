@@ -21,11 +21,12 @@ export class Assambler {
 
     const splitted = this.splitCodeSections(program);
 
+    console.log(splitted[0])
+
     const processed_program = this.preprocessor.preprocess(splitted[0]);
 
     const data = this.parseData(this.removeLabels(splitted[1]));
     console.log(data);
-    console.log("processed program");
     console.log(processed_program);
 
     /*
@@ -37,7 +38,9 @@ export class Assambler {
 
     for (let x = 0; x < processed_program.length; x++) {
       final_lines.push(this.encoder.encode(processed_program[x]));
+      final_lines[x].meta
     }
+
 
     return { code: final_lines, data };
   }
