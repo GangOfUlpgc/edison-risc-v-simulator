@@ -10,17 +10,13 @@ interface RegisterNext {
 
 export class RegisterBank {
   read(addr: number) {
-    if (addr % 4 !== 0) throw new Error(`Invalid register address: ${addr}`);
     return CPUMem.getState().registers[addr];
   }
 
   write(addr: number, value: number) {
-    if (addr % 4 !== 0) throw new Error(`Invalid register address: ${addr}`);
+    /*@ts-ignore*/
     CPUMem.setState((state) => ({
-      registers: {
-        ...state.registers,
-        [addr]: value,
-      },
+      registers: state.registers.map((v, i) => (i === addr ? value : v)),
     }));
   }
 

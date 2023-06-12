@@ -6,6 +6,7 @@ const firstInputStyle = { top: 20, left: 0 };
 const secondInputStyle = { top: 95, left: 0 }
 const selectorStyle = { top: 90 }
 const outputStyle = { right: 0 }
+const zeroStyle = { right: 0, top: 44 }
 
 export default function Alu() {
   return (
@@ -14,6 +15,7 @@ export default function Alu() {
       <Handle type="target" position={Position.Left} style={firstInputStyle} id="input1" />
       <Handle type="target" position={Position.Left} style={secondInputStyle} id="input2" />
       <Handle type="target" position={Position.Bottom} style={selectorStyle} id="selector" />
+      <Handle type="source" position={Position.Right} style={zeroStyle} id="zero" />
       <Handle type="source" position={Position.Right} style={outputStyle} id="output" />
     </Box>
   );

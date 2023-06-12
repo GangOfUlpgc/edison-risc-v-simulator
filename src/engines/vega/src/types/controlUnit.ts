@@ -1,15 +1,14 @@
 export interface ControlUnitSignals {
   // Execute stage
-  ALUop: string;
-  ALUsrc: string;
+  ALUop: number;
+  ALUsrc: number;
   // Memory access stage
-  Branch: string;
-  MemRead: string;
-  MemWrite: string;
+  Branch: number;
+  MemRead: number;
+  MemWrite: number;
   // Write back stage
-  RegWrite: string;
-  RegDst: string;
-  MemToReg: string;
+  RegWrite: number;
+  MemToReg: number;
 }
 
 export interface IControlUnit {
