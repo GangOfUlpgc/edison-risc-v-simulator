@@ -2,14 +2,27 @@ import React from "react";
 import { Box } from "@chakra-ui/react";
 import { Handle, Position } from "reactflow";
 import ValuePopover from "../components/ValuePopover";
+import { UICPUState } from "@vega/types/state";
+import { rv32i } from "../../../../../cpus";
 
 const firstInputStyle = { top: 20, left: 0 };
 const secondInputStyle = { top: 95, left: 0 };
 const outputStyle = { right: 0 };
 
-export default function Adder() {
+export default function Adder({
+  data,
+}: {
+  data: { query: (state: UICPUState) => any };
+}) {
+  const value: any = rv32i.useState(data?.query ?? (() => {}));
+
   return (
-    <ValuePopover value="0x00000000">
+    <ValuePopover
+      value={
+        "0x" +
+        ((value == null ? "" : value).toString(16).padStart(8, "0") ?? "0")
+      }
+    >
       <Box
         backgroundColor="gray.200"
         px="2"

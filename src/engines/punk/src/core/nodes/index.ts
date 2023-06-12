@@ -5,6 +5,7 @@ import Branch from "./Branch";
 import BufferExMem from "./BufferExMem";
 import BufferIdEx from "./BufferIdEx";
 import BufferMemWb from "./BufferMemWb";
+import BufferRegs from "./BufferRegs";
 import ControlUnit from "./ControlUnit";
 import DataMem from "./DataMem";
 import InstructionMemory from "./InstructionMemory";
@@ -28,6 +29,7 @@ const DatapathNodes = {
   controlUnit: ControlUnit,
   aluControl: AluControl,
   branch: Branch,
+  bufferregs: BufferRegs,
 };
 
 export { Adder, Alu, DataMem, Multiplexor, PC, Registers, DatapathNodes };

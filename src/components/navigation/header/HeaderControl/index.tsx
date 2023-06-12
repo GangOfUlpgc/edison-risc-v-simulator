@@ -43,13 +43,10 @@ export default function HeaderControl() {
           <FaBug />
         </Element>
         <Separator />
-        <Element>
-          <FaSave></FaSave>
-        </Element>
-        <Separator />
         <Element
           onClick={() => {
             console.log(contents());
+            rv32i.reload();
             rv32i.loadProgram(contents());
             nav("dissasembly");
             ui.setSidebarWindow("regs");
@@ -74,18 +71,6 @@ export default function HeaderControl() {
         </Element>
         <Element>
           <FaPlay />
-        </Element>
-        <Separator />
-        <Element>
-          <FaStop />
-        </Element>
-        <Separator />
-        <Element>
-          <FaPause />
-        </Element>
-        <Separator />
-        <Element>
-          <FaBackward />
         </Element>
         <Separator />
         <Element onClick={() => rv32i.next()}>

@@ -18,10 +18,17 @@ export default function ValuePopover({
   ...popoverprops
 }: props) {
   return (
-    <Popover isOpen={true} placement="right" {...popoverprops}>
+    <Popover
+      flip={false}
+      isOpen={true}
+      placement="right"
+      {...popoverprops}
+      isLazy={false}
+      preventOverflow={false}
+    >
       <PopoverTrigger>{children}</PopoverTrigger>
-      <PopoverContent width="fit-content">
-        <Text px="2" fontSize="10px">
+      <PopoverContent width="fit-content" zIndex="modal">
+        <Text px="2" fontSize="10px" whiteSpace="pre-line" >
           {value}
         </Text>
       </PopoverContent>
