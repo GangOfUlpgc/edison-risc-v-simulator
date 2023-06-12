@@ -21,7 +21,7 @@ export default function ValuePopover({
     <Popover isOpen={true} placement="right" {...popoverprops}>
       <PopoverTrigger>{children}</PopoverTrigger>
       <PopoverContent width="fit-content" zIndex="modal">
-        <Text px="2" fontSize="10px">
+        <Text px="2" fontSize="10px" whiteSpace="pre-line" >
           {value}
         </Text>
       </PopoverContent>
