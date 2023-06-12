@@ -9,12 +9,14 @@ import {
   FaFile,
   FaSave,
   FaUndo,
+  FaBug,
 } from "react-icons/fa";
 import { List } from "./List";
 import { Element } from "./Element";
 import { useUI } from "../../../../storage/ui.storage";
 import { rv32i } from "../../../../cpus/riscv-rv32i";
 import { useNavigate } from "react-router";
+import { useFileStorage } from "../../../../storage/file.storage";
 
 function Separator() {
   return (
@@ -27,17 +29,27 @@ function Separator() {
 export default function HeaderControl() {
   const nav = useNavigate();
   const ui = useUI();
+  const contents = useFileStorage((state) => state.currentFileContents);
 
   return (
     <Box display="flex" gap="1rem">
       <List>
+        <Element
+          onClick={() => {
+            ui.toggleDebuMode();
+          }}
+        >
+          <FaBug />
+        </Element>
+        <Separator />
         <Element>
           <FaSave></FaSave>
         </Element>
         <Separator />
         <Element
           onClick={() => {
-            rv32i.loadRom([0xff38800, 0xf390800, 0xf390806]);
+            console.log(contents());
+            rv32i.loadProgram(contents());
             nav("dissasembly");
             ui.setSidebarWindow("regs");
             ui.setRegisterWindow("mem");

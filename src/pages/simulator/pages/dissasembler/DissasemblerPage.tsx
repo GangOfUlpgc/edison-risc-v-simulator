@@ -1,94 +1,59 @@
 import React, { useState } from "react";
 import { rv32i } from "../../../../cpus/riscv-rv32i";
-import { Box, Text } from "@chakra-ui/react";
-
-interface props {
-  address: number,
-}
-
-
-function DissasemblerElement({ address }: props) {
-
-  return (
-    <Box
-      display="flex"
-      justifyContent="center"
-      minW="6rem"
-      py="0.1rem"
-      bgColor="gray.100"
-      px="4"
-      mx="1"
-      my="2"
-      fontWeight="semibold"
-      borderRadius="lg"
-    >
-      <Text textAlign="center" flexBasis="15%" textColor="gray.600">
-        {address}
-      </Text>
-      <Text textAlign="center" flexBasis="15%" textColor="gray.600">
-        asdasd
-      </Text>
-      <Text textAlign="center" flexBasis="70%" textColor="gray.600">
-        asdasd
-      </Text>
-    </Box>
-  )
-}
-
+import { As, Box, Grid, GridItem } from "@chakra-ui/react";
+import Header from "./components/Header";
+import DisasemblerCard from "./components/DisasemblerCard";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function DissasemblerPage() {
   const rom = rv32i.useMem((state) => state.rom);
-  const state = rv32i.useState();
-  console.log(JSON.stringify)
-
   const [items, setItems] = useState(Array.from({ length: 70 }));
   const showMoreAddress = () => {
     setItems((prevItems) => prevItems.concat(Array.from({ length: 20 })));
   };
+
   return (
     <Box
       height="100%"
-      display="flex"
-      flexDirection="column"
-      gap="4"
-      bgColor="white"
-      px="1"
       borderRadius="xl"
-      py="1"
-      mx="2"
-      mb="3"
+      bgColor="gray.100"
+      position="relative"
+      display="flex"
+      flexDir="column"
     >
-      <Box
-        display="flex"
-        justifyContent="center"
-        minW="6rem"
-        py="0.1rem"
-        bgColor="gray.100"
-        px="4"
-        mx="1"
-        my="2"
-        fontWeight="semibold"
-        borderRadius="lg"
-      >
-        <Text textAlign="center" flexBasis="15%" textColor="gray.600">
-          Address
-        </Text>
-        <Text textAlign="center" flexBasis="15%" textColor="gray.600">
-          Opcode
-        </Text>
-        <Text textAlign="center" flexBasis="70%" textColor="gray.600">
-          Instruction
-        </Text>
-      </Box>
+      <Header></Header>
+
       <Box
         id="registerContainer"
-        display="flex"
-        flexDirection="column"
+        height="100%"
         overflow="auto"
+        borderWidth={2}
+        borderColor="gray.300"
+        borderTopWidth={0}
+        borderRadius="lg"
+        borderTopRadius="none"
+        backgroundColor="white"
       >
-        <pre style={{ maxWidth: "100px" }}>{JSON.stringify(rom)}</pre>
-        <pre style={{ maxWidth: "100px" }}>{JSON.stringify(state)}</pre>
-
+        <InfiniteScroll
+          scrollableTarget="registerContainer"
+          style={{
+            display: "grid",
+            width: "100%",
+            gridTemplateColumns: "repeat(8, 1fr)",
+          }}
+          dataLength={items.length}
+          next={showMoreAddress}
+          hasMore={true}
+          loader={<h4>Loading...</h4>}
+        >
+          {items.map((item, index) => (
+            <DisasemblerCard
+              key={index}
+              address={index * 4}
+              obj={rom[index * 4]}
+            />
+          ))}
+        </InfiniteScroll>
       </Box>
     </Box>
   );

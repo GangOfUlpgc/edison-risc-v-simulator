@@ -44,9 +44,6 @@ export function Sidebar() {
           <SidebarElement name="Registros y memoria" slug="regs">
             <VscDebugAlt />
           </SidebarElement>
-          <SidebarElement name="Buscador" slug="search">
-            <VscSearch />
-          </SidebarElement>
         </Box>
         <SidebarElement name="Configuracion" slug="config">
           <VscSettingsGear />

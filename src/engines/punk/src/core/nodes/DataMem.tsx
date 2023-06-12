@@ -10,10 +10,10 @@ export default function DataMem() {
   return (
     <Box backgroundColor="gray.200" position="relative" height="100">
       <Box padding="2" py="6">Data memory</Box>
-      <Handle type="source" position={Position.Left} style={addressStyle} id="address" />
-      <Handle type="source" position={Position.Left} style={writeDataStyle} id="writeData" />
-      <Handle type="source" position={Position.Top} id="memRead" />
-      <Handle type="source" position={Position.Bottom} id="memWrite" />
+      <Handle type="target" position={Position.Left} style={addressStyle} id="address" />
+      <Handle type="target" position={Position.Left} style={writeDataStyle} id="writeData" />
+      <Handle type="target" position={Position.Top} id="memRead" />
+      <Handle type="target" position={Position.Bottom} id="memWrite" />
       <Handle type="source" position={Position.Right} id="readData" />
     </Box>
   )
