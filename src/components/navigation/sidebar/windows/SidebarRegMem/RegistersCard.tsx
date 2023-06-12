@@ -66,6 +66,7 @@ export default function RegistersCard() {
       <Box height="95%" overflow="auto" display="flex" gap={2} flexDir="column">
         {regs.map((x, i) => (
           <RegisterCardElement
+            key={i}
             name={"x" + i}
             value={x.toString(16).padStart(8, "0")}
           />
