@@ -125,7 +125,7 @@ const nodes: Node[] = [
   {
     id: "idex",
     type: "bufferidex",
-    position: { x: 500, y: 50 },
+    position: { x: 500, y: 100 },
     data: { label: "buffer id/ex" },
   },
   {
@@ -146,30 +146,34 @@ const nodes: Node[] = [
     data: {
       label: "EX",
     },
+    type: "bufferregs",
     style: {
       border: "1px solid #48BB78",
+      borderRadius: "2px",
       fontSize: "0.5rem",
       width: 36, // Initial width of the node
       height: 30, // Initial height of the node
     },
     targetPosition: Position.Left,
     sourcePosition: Position.Right,
-    position: { x: 500, y: 30 },
+    position: { x: 500, y: 70 },
   },
   {
     id: "mNodeIdexBuffer",
     data: {
       label: "M",
     },
+    type: "bufferregs",
     style: {
       border: "1px solid #48BB78",
+      borderRadius: "2px",
       fontSize: "0.5rem",
       width: 36, // Initial width of the node
       height: 30, // Initial height of the node
     },
     targetPosition: Position.Left,
     sourcePosition: Position.Right,
-    position: { x: 500, y: 0 },
+    position: { x: 500, y: 40 },
   },
   {
     id: "wbNodeIdexBuffer",
@@ -179,6 +183,7 @@ const nodes: Node[] = [
     },
     style: {
       border: "1px solid #48BB78",
+      borderRadius: "2px",
       fontSize: "0.5rem",
       width: 36, // Initial width of the node
       height: 30, // Initial height of the node
@@ -186,15 +191,17 @@ const nodes: Node[] = [
     },
     targetPosition: Position.Left,
     sourcePosition: Position.Right,
-    position: { x: 500, y: -30 },
+    position: { x: 500, y: 10 },
   },
   {
     id: "mNodeExmemBuffer",
+    type: "bufferregs",
     data: {
       label: "M",
     },
     style: {
       border: "1px solid #805AD5",
+      borderRadius: "2px",
       fontSize: "0.5rem",
       width: 39, // Initial width of the node
       height: 30, // Initial height of the node
@@ -205,11 +212,13 @@ const nodes: Node[] = [
   },
   {
     id: "wbNodeExmemBuffer",
+    type: "bufferregs",
     data: {
       label: "WB",
     },
     style: {
       border: "1px solid #805AD5",
+      borderRadius: "2px",
       fontSize: "0.5rem",
       width: 39, // Initial width of the node
       height: 30, // Initial height of the node
@@ -220,11 +229,13 @@ const nodes: Node[] = [
   },
   {
     id: "wbNodeMemwbBuffer",
+    type: "bufferregs",
     data: {
       label: "WB",
     },
     style: {
       border: "1px solid #E53E3E",
+      borderRadius: "2px",
       fontSize: "0.5rem",
       width: 44, // Initial width of the node
       height: 30, // Initial height of the node
@@ -526,7 +537,7 @@ const edges: Edge[] = [
     },
   },
   {
-    id: "e3-14",
+    id: "e3-15",
     source: "alu",
     target: "exmem",
     sourceHandle: "zero",
@@ -742,7 +753,7 @@ const edges: Edge[] = [
     style: { stroke: "#4299e1a6" },
   },
   {
-    id: "c9",
+    id: "c10",
     source: "exNodeIdexBuffer",
     target: "aluControl",
     sourceHandle: "1",
@@ -754,7 +765,7 @@ const edges: Edge[] = [
     style: { stroke: "#4299e1a6" },
   },
   {
-    id: "c10",
+    id: "c11",
     source: "mNodeExmemBuffer",
     target: "dataMemory",
     sourceHandle: "1",
@@ -762,7 +773,7 @@ const edges: Edge[] = [
     style: { stroke: "#4299e1a6" },
   },
   {
-    id: "c11",
+    id: "c12",
     source: "mNodeExmemBuffer",
     target: "dataMemory",
     sourceHandle: "1",
@@ -774,7 +785,7 @@ const edges: Edge[] = [
     style: { stroke: "#4299e1a6" },
   },
   {
-    id: "c12",
+    id: "c13",
     source: "mNodeExmemBuffer",
     target: "branch",
     sourceHandle: "1",
@@ -786,7 +797,7 @@ const edges: Edge[] = [
     style: { stroke: "#4299e1a6" },
   },
   {
-    id: "c13",
+    id: "c14",
     source: "exmem",
     target: "branch",
     sourceHandle: "zero",
@@ -798,7 +809,7 @@ const edges: Edge[] = [
     style: { stroke: "#4299e1a6" },
   },
   {
-    id: "c14",
+    id: "c15",
     source: "branch",
     target: "muxPc",
     sourceHandle: "output",

@@ -1,6 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
 import { Handle, Position } from "reactflow";
+import ValuePopover from "../components/ValuePopover";
 
 export default function Multiplexor() {
   const firstInputStyle = { top: 20 };
@@ -12,7 +13,9 @@ export default function Multiplexor() {
       <Handle type="target" position={Position.Left} style={firstInputStyle} id="input1" />
       <Handle type="target" position={Position.Left} style={secondInputStyle} id="input2" />
       <Handle type="target" position={Position.Bottom} id="selector" />
-      <Handle type="source" position={Position.Right} id="output" />
+      <ValuePopover value="0x00000000">
+        <Handle type="source" position={Position.Right} id="output" />
+      </ValuePopover>
     </Box>
   )
 }
