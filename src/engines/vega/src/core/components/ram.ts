@@ -23,6 +23,12 @@ export class RAM {
     }));
   }
 
+  loadProgram(program: number[]) {
+    program.forEach((data, index) => {
+      this.write(index * 4, data);
+    });
+  }
+
   next({ addr, writeData, memRead, memWrite }: RAMNext) {
     if (memRead) {
       return this.read(addr);

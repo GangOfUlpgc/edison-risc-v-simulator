@@ -10,9 +10,7 @@ import {
 } from "./components";
 import { CPUState, CPUMem } from "./storage";
 import { Assambler } from "./assambler";
-import {
-  EncodedInstruction,
-} from "@vega/types/assambler";
+import { EncodedInstruction } from "@vega/types/assambler";
 import { ControlUnitSignals } from "@vega/types/controlUnit";
 import { AluControlUnit } from "./components/aluControlUnit";
 
@@ -44,7 +42,8 @@ export default class Vega {
     console.log(program);
     const decoded = this.assambler.decode(program);
     console.log(program);
-    this.loadRom(decoded);
+    this.loadRom(decoded.code);
+    this.ram.loadProgram(decoded.data);
   }
 
   loadRom(rom: EncodedInstruction[]) {
@@ -165,7 +164,7 @@ export default class Vega {
     let readedData = 0;
 
     if (pipe.cumeta?.MemRead) {
-      readedData = this.ram.read(pipe.cpumeta.ALUOut ?? 0);
+      readedData = this.ram.read(pipe.cpumeta.ALUOut || 0);
     }
 
     if (pipe.cumeta?.MemWrite) {
@@ -191,7 +190,7 @@ export default class Vega {
     const pipe = CPUState.getState().pipeline.WB;
     let writeData = 0;
 
-    if (pipe.cumeta.RegWrite) {
+    if (pipe.cumeta?.RegWrite == 1) {
       console.log("MEMTOREG: ", pipe.cumeta.MemToReg);
       writeData =
         ((pipe.cumeta.MemToReg ?? 0) == 0
