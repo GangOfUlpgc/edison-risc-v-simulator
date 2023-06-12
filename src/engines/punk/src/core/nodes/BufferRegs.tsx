@@ -1,6 +1,7 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Popover, Text } from "@chakra-ui/react";
 import React from "react";
 import { Handle, NodeProps, Position } from "reactflow";
+import ValuePopover from "../components/ValuePopover";
 
 export default function BufferRegs({ data }: NodeProps) {
   return (
@@ -14,7 +15,9 @@ export default function BufferRegs({ data }: NodeProps) {
       h="30px"
     >
       <Text>{data["label"]}</Text>
-      <Handle type="target" position={Position.Left} />
+      <ValuePopover value="0x00000000" placement="left">
+        <Handle type="target" position={Position.Left} />
+      </ValuePopover>
       <Handle type="source" position={Position.Right} />
     </Box>
   );
