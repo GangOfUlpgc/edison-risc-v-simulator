@@ -182,6 +182,7 @@ const nodes: Node[] = [
       fontSize: "0.5rem",
       width: 36, // Initial width of the node
       height: 30, // Initial height of the node
+      borderRadius: 2,
     },
     targetPosition: Position.Left,
     sourcePosition: Position.Right,
