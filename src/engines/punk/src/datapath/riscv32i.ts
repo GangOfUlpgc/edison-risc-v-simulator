@@ -125,7 +125,7 @@ const nodes: Node[] = [
   {
     id: "idex",
     type: "bufferidex",
-    position: { x: 500, y: 50 },
+    position: { x: 500, y: 100 },
     data: { label: "buffer id/ex" },
   },
   {
@@ -156,7 +156,7 @@ const nodes: Node[] = [
     },
     targetPosition: Position.Left,
     sourcePosition: Position.Right,
-    position: { x: 500, y: 20 },
+    position: { x: 500, y: 70 },
   },
   {
     id: "mNodeIdexBuffer",
@@ -173,7 +173,7 @@ const nodes: Node[] = [
     },
     targetPosition: Position.Left,
     sourcePosition: Position.Right,
-    position: { x: 500, y: -10 },
+    position: { x: 500, y: 40 },
   },
   {
     id: "wbNodeIdexBuffer",
@@ -190,7 +190,7 @@ const nodes: Node[] = [
     },
     targetPosition: Position.Left,
     sourcePosition: Position.Right,
-    position: { x: 500, y: -40 },
+    position: { x: 500, y: 10 },
   },
   {
     id: "mNodeExmemBuffer",
