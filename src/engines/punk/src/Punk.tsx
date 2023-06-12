@@ -26,7 +26,7 @@ export default function Punk() {
   const [edges] = useEdgesState(riscv32i.edges);
 
   return (
-    <Box width="100%" height="100%">
+    <Box width="100%" height="100%" display="flex" flexDirection="column">
       <SegmentedBar />
       <ReactFlow
         defaultViewport={{ zoom: 0.5, x: 240, y: 240 }}
