@@ -27,6 +27,7 @@ export default function Punk() {
   return (
     <Box width="100%" height="100%">
       <ReactFlow
+        defaultViewport={{ zoom: 0.5, x: 240, y: 240 }}
         nodeTypes={DatapathNodes}
         nodes={nodes}
         edges={edges}
