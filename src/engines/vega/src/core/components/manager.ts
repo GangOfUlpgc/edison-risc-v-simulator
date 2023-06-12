@@ -1,7 +1,5 @@
 import { CPUState } from "../storage/cpu";
-import {
-  EncodedInstructionMeta,
-} from "@vega/types/assambler";
+import { EncodedInstructionMeta } from "@vega/types/assambler";
 
 export class CPUStateManager {
   getState() {

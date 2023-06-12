@@ -1,12 +1,21 @@
 import { EncodedInstruction } from "@vega/types/assambler";
 
 const opCode: { [op: string]: string } = {
+  srl: "0110011",
+  sll: "0110011",
   ld: "0010011",
   sd: "0100011",
   beq: "1100011",
+  lw: "0000011",
+  sw: "0100011",
+  xor: "0110011",
 };
 
 const funCode: { [op: string]: string } = {
+  srl: "101",
+  sll: "001",
+  lw: "010",
+  sw: "010",
   ld: "011",
   sd: "011",
   beq: "000",
@@ -14,6 +23,7 @@ const funCode: { [op: string]: string } = {
   sub: "000",
   and: "111",
   or: "110",
+  xor: "100",
 };
 
 const rcode: { [op: string]: string } = {
@@ -21,15 +31,25 @@ const rcode: { [op: string]: string } = {
   sub: "0100000",
   and: "0000000",
   or: "0000000",
+  xor: "0000000",
+  sll: "0000000",
+  srl: "0000000",
 };
 
 const instructionsFun: { [instruction: string]: (load: string[]) => any } = {
+  xor: rtype,
+  sll: rtype,
+  srl: rtype,
   add: rtype,
   sub: rtype,
   ld: itype,
   sd: stype,
   beq: sbtype,
   default: rtype,
+  lw: itype,
+  sw: itype,
+  and: rtype,
+  or: rtype,
 };
 
 export class Encoder {
