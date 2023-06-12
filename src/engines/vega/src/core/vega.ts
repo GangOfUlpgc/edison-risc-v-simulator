@@ -12,9 +12,7 @@ import { CPUState, CPUMem } from "./storage";
 import { Assambler } from "./assambler";
 import {
   EncodedInstruction,
-  EncodedInstructionMeta,
 } from "@vega/types/assambler";
-import { State } from "xstate";
 import { ControlUnitSignals } from "@vega/types/controlUnit";
 import { AluControlUnit } from "./components/aluControlUnit";
 

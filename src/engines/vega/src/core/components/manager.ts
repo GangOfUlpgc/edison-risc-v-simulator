@@ -1,7 +1,5 @@
-import { UICPUState } from "@vega/types/state";
 import { CPUState } from "../storage/cpu";
 import {
-  EncodedInstruction,
   EncodedInstructionMeta,
 } from "@vega/types/assambler";
 

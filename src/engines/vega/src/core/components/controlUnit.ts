@@ -1,5 +1,4 @@
 import {
-  EncodedInstruction,
   EncodedInstructionMeta,
   rtype,
 } from "@vega/types/assambler";

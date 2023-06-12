@@ -1,3 +1,4 @@
+import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import SimulatorPage from "../pages/simulator/SimulatorPage";
 import EditorPage from "../pages/simulator/pages/editor/EditorPage";

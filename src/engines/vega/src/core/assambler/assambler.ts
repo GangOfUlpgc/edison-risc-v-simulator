@@ -27,7 +27,7 @@ export class Assambler {
     jalr x0, 0x00000000
     */
 
-    let final_lines: EncodedInstruction[] = [];
+    const final_lines: EncodedInstruction[] = [];
 
     for (let x = 0; x < processed_program.length; x++) {
       final_lines.push(this.encoder.encode(processed_program[x]));
