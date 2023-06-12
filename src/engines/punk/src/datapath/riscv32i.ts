@@ -146,30 +146,34 @@ const nodes: Node[] = [
     data: {
       label: "EX",
     },
+    type: "bufferregs",
     style: {
       border: "1px solid #48BB78",
+      borderRadius: "2px",
       fontSize: "0.5rem",
       width: 36, // Initial width of the node
       height: 30, // Initial height of the node
     },
     targetPosition: Position.Left,
     sourcePosition: Position.Right,
-    position: { x: 500, y: 30 },
+    position: { x: 500, y: 20 },
   },
   {
     id: "mNodeIdexBuffer",
     data: {
       label: "M",
     },
+    type: "bufferregs",
     style: {
       border: "1px solid #48BB78",
+      borderRadius: "2px",
       fontSize: "0.5rem",
       width: 36, // Initial width of the node
       height: 30, // Initial height of the node
     },
     targetPosition: Position.Left,
     sourcePosition: Position.Right,
-    position: { x: 500, y: 0 },
+    position: { x: 500, y: -10 },
   },
   {
     id: "wbNodeIdexBuffer",
@@ -179,21 +183,24 @@ const nodes: Node[] = [
     },
     style: {
       border: "1px solid #48BB78",
+      borderRadius: "2px",
       fontSize: "0.5rem",
       width: 36, // Initial width of the node
       height: 30, // Initial height of the node
     },
     targetPosition: Position.Left,
     sourcePosition: Position.Right,
-    position: { x: 500, y: -30 },
+    position: { x: 500, y: -40 },
   },
   {
     id: "mNodeExmemBuffer",
+    type: "bufferregs",
     data: {
       label: "M",
     },
     style: {
       border: "1px solid #805AD5",
+      borderRadius: "2px",
       fontSize: "0.5rem",
       width: 39, // Initial width of the node
       height: 30, // Initial height of the node
@@ -204,11 +211,13 @@ const nodes: Node[] = [
   },
   {
     id: "wbNodeExmemBuffer",
+    type: "bufferregs",
     data: {
       label: "WB",
     },
     style: {
       border: "1px solid #805AD5",
+      borderRadius: "2px",
       fontSize: "0.5rem",
       width: 39, // Initial width of the node
       height: 30, // Initial height of the node
@@ -219,11 +228,13 @@ const nodes: Node[] = [
   },
   {
     id: "wbNodeMemwbBuffer",
+    type: "bufferregs",
     data: {
       label: "WB",
     },
     style: {
       border: "1px solid #E53E3E",
+      borderRadius: "2px",
       fontSize: "0.5rem",
       width: 44, // Initial width of the node
       height: 30, // Initial height of the node
