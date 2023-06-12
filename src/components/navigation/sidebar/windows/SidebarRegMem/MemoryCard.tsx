@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Select, Text } from "@chakra-ui/react";
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { rv32i } from "../../../../../cpus/riscv-rv32i";
@@ -16,6 +16,32 @@ interface props {
   address: number;
 }
 
+function MemoryCardRamElement({ address }: props) {
+  const rom = rv32i.useMem((state) => state.ram);
+  const value = rom[address] | 0;
+  const pipeline = rv32i.useState((state) => state.pipeline);
+
+  return (
+    <Box display="flex" justifyContent="center" minW="6rem" flexGrow="1">
+      <Text
+        textAlign="center"
+        flexBasis="50%"
+        textColor="gray.600"
+        fontWeight="semibold"
+      >
+        0x{address.toString(16).padStart(8, "0")}
+      </Text>
+      <Text
+        textAlign="center"
+        flexBasis="50%"
+        textColor="gray.600"
+        fontWeight="semibold"
+      >
+        {value ? "0x" + value.toString(16).padStart(8, "0") : "0x00000000"}
+      </Text>
+    </Box>
+  );
+}
 function MemoryCardElement({ address }: props) {
   const rom = rv32i.useMem((state) => state.rom);
   const pc = rv32i.useMem((state) => state.pc);
@@ -61,62 +87,82 @@ function MemoryCardElement({ address }: props) {
 }
 
 export default function MemoryCard() {
+  const [mem, setMem] = useState("rom");
   const [items, setItems] = useState(Array.from({ length: 70 }));
   const showMoreAddress = () => {
     setItems((prevItems) => prevItems.concat(Array.from({ length: 20 })));
   };
 
   return (
-    <Box
-      height="100%"
-      display="flex"
-      flexDirection="column"
-      gap="4"
-      bgColor="white"
-      px="1"
-      borderRadius="xl"
-      py="1"
-      mx="2"
-      mb="3"
-    >
-      <Box
-        display="flex"
-        justifyContent="center"
-        minW="6rem"
-        py="0.1rem"
-        bgColor="gray.100"
-        px="4"
-        mx="1"
-        my="2"
-        fontWeight="semibold"
+    <>
+      <Select
+        px="1"
+        backgroundColor="white"
+        py="2"
+        size="sm"
         borderRadius="lg"
-        flexGrow="1"
+        variant="outline"
+        value={mem}
+        onChange={(data) => setMem(data.target.value)}
       >
-        <Text textAlign="center" flexBasis="50%" textColor="gray.600">
-          Address
-        </Text>
-        <Text textAlign="center" flexBasis="50%" textColor="gray.600">
-          Instruction
-        </Text>
-      </Box>
+        <option value="rom">Instruction Mem</option>
+        <option value="ram">Data Mem</option>
+      </Select>
       <Box
-        id="registerContainer"
+        height="100%"
         display="flex"
         flexDirection="column"
-        overflow="auto"
+        gap="4"
+        bgColor="white"
+        px="1"
+        borderRadius="xl"
+        py="1"
+        mx="2"
+        mb="3"
       >
-        <InfiniteScroll
-          scrollableTarget="registerContainer"
-          dataLength={items.length}
-          next={showMoreAddress}
-          hasMore={true}
-          loader={<h4>Loading...</h4>}
+        <Box
+          display="flex"
+          justifyContent="center"
+          minW="6rem"
+          py="0.1rem"
+          bgColor="gray.100"
+          px="4"
+          mx="1"
+          my="2"
+          fontWeight="semibold"
+          borderRadius="lg"
+          flexGrow="1"
         >
-          {items.map((item, index) => (
-            <MemoryCardElement key={index} address={index * 4} />
-          ))}
-        </InfiniteScroll>
+          <Text textAlign="center" flexBasis="50%" textColor="gray.600">
+            Address
+          </Text>
+          <Text textAlign="center" flexBasis="50%" textColor="gray.600">
+            Instruction
+          </Text>
+        </Box>
+        <Box
+          id="registerContainer"
+          display="flex"
+          flexDirection="column"
+          overflow="auto"
+        >
+          <InfiniteScroll
+            scrollableTarget="registerContainer"
+            dataLength={items.length}
+            next={showMoreAddress}
+            hasMore={true}
+            loader={<h4>Loading...</h4>}
+          >
+            {items.map((item, index) =>
+              mem == "ram" ? (
+                <MemoryCardRamElement key={index} address={index * 4} />
+              ) : (
+                <MemoryCardElement key={index} address={index * 4} />
+              )
+            )}
+          </InfiniteScroll>
+        </Box>
       </Box>
-    </Box>
+    </>
   );
 }

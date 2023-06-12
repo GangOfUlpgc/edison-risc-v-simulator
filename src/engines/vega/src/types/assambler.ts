@@ -15,4 +15,4 @@ export interface EncodedInstruction {
   meta: EncodedInstructionMeta;
 }
 
-export const rtype = ["add", "sub", "or", "and"];
+export const rtype = ["add", "sub", "or", "and", "xor", "sll", "srl"];
