@@ -1,6 +1,6 @@
 import { UICPUState } from "@vega/types/state";
 import { Edge, Node, Position } from "reactflow";
-import { rv32i } from "../../../../../cpus";
+import { rv32i } from "../../../../cpus";
 
 const nodes: Node[] = [
   {
@@ -64,7 +64,10 @@ const nodes: Node[] = [
     id: "adderIdex",
     type: "adder",
     position: { x: 800, y: 50 },
-    data: { label: "Add" },
+    data: {
+      label: "Add",
+      query: (state: UICPUState) => state.pipeline.MEM.cpumeta?.jumpDir ?? 0,
+    },
   },
   {
     id: "pc",

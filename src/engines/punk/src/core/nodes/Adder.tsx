@@ -18,7 +18,10 @@ export default function Adder({
 
   return (
     <ValuePopover
-      value={"0x" + ((value ?? "").toString(16).padStart(8, "0") ?? "0")}
+      value={
+        "0x" +
+        ((value == null ? "" : value).toString(16).padStart(8, "0") ?? "0")
+      }
     >
       <Box
         backgroundColor="gray.200"

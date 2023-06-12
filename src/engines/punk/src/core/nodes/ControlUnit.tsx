@@ -55,7 +55,7 @@ export default function ControlUnit() {
       <PopoverContent width="fit-content" p="3">
         <Text>ALUop: {uc?.ALUop ?? 0}</Text>
         <Text>ALUsrc: {uc?.ALUsrc ?? 0}</Text>
-        <Text>Branch: {uc?.Branch ?? 0}0</Text>
+        <Text>Branch: {uc?.Branch ?? 0}</Text>
         <Text>MemRead: {uc?.MemRead ?? 0}</Text>
         <Text>MemWrite: {uc?.MemWrite ?? 0}</Text>
         <Text>RegWrite: {uc?.RegWrite ?? 0}</Text>
