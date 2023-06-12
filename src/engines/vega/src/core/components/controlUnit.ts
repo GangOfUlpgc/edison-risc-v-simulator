@@ -1,7 +1,4 @@
-import {
-  EncodedInstructionMeta,
-  rtype,
-} from "@vega/types/assambler";
+import { EncodedInstructionMeta, rtype } from "@vega/types/assambler";
 import { ControlUnitSignals } from "@vega/types/controlUnit";
 
 const controlMap: { [instruction: string]: ControlUnitSignals } = {
@@ -16,6 +13,30 @@ const controlMap: { [instruction: string]: ControlUnitSignals } = {
     //Write back
     RegWrite: 0b1,
     MemToReg: 0b0,
+  },
+  lw: {
+    //Execution
+    ALUop: 0b00,
+    ALUsrc: 1,
+    //Mem Access
+    Branch: 0,
+    MemRead: 1,
+    MemWrite: 0,
+    //Write back
+    RegWrite: 1,
+    MemToReg: 1,
+  },
+  sw: {
+    //Execution
+    ALUop: 0b00,
+    ALUsrc: 1,
+    //Mem Access
+    Branch: 0,
+    MemRead: 0,
+    MemWrite: 1,
+    //Write back
+    RegWrite: 0,
+    MemToReg: 0,
   },
   ld: {
     //Execution

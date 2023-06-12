@@ -5,9 +5,9 @@ interface UIState {
   addingFile: boolean;
   debug: boolean;
   sidebarWindow: string | null;
-  registerWindow: "reg" | "mem";
+  registerWindow: "reg" | "mem" | "ram";
   setSidebarWindow: (window: string | null) => void;
-  setRegisterWindow: (window: "reg" | "mem") => void;
+  setRegisterWindow: (window: "reg" | "mem" | "ram") => void;
   setAddingFile: (adding: boolean) => void;
   toggleDebuMode: () => void;
 }
@@ -20,7 +20,7 @@ export const useUI = create(
       setSidebarWindow: (window: string | null) =>
         set({ sidebarWindow: window }),
       registerWindow: "reg",
-      setRegisterWindow: (window: "reg" | "mem") =>
+      setRegisterWindow: (window: "reg" | "mem" | "ram") =>
         set({ registerWindow: window }),
       addingFile: false,
       setAddingFile: (adding: boolean) => set({ addingFile: adding }),
