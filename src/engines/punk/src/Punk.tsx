@@ -1,18 +1,16 @@
-import React, { useCallback } from "react";
+import React from "react";
 import ReactFlow, {
   MiniMap,
   Controls,
   Background,
   useNodesState,
   useEdgesState,
-  SmoothStepEdge,
   StepEdge,
 } from "reactflow";
 import "reactflow/dist/style.css";
 import { DatapathNodes } from "./core/nodes";
 import riscv32i from "./datapath/riscv32i";
 import { Box } from "@chakra-ui/react";
-import { rv32i } from "src/cpus";
 import Test from "./core/edges/Test";
 import Horizontal from "./core/edges/Horizontal";
 

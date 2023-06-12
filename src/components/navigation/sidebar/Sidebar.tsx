@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box } from "@chakra-ui/react";
 import {
   VscDebugAlt,
   VscSettingsGear,
-  VscSearch,
   VscFiles,
 } from "react-icons/vsc";
 import SidebarElement from "./SidebarElement";
