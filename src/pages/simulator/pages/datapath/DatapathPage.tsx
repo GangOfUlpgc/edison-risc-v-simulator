@@ -9,7 +9,7 @@ export default function DatapathPage() {
   const cpu = rv32i.useState();
   const mem = rv32i.useMem();
 
-  return debug ? (
+  return !debug ? (
     <Punk></Punk>
   ) : (
     <div>
