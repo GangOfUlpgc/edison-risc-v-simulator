@@ -41,9 +41,9 @@ const nodes: Node[] = [
     data: { label: "Add" },
   },
   {
-    id: 'add4node',
+    id: "add4node",
     data: {
-      label: '+ 4',
+      label: "+ 4",
     },
     style: {
       width: 60, // Initial width of the node
@@ -91,9 +91,9 @@ const nodes: Node[] = [
     data: { label: "Instruction Memory" },
   },
   {
-    id: 'immGen',
+    id: "immGen",
     data: {
-      label: 'Imm Gen',
+      label: "Imm Gen",
     },
     style: {
       width: 90, // Initial width of the node
@@ -104,9 +104,9 @@ const nodes: Node[] = [
     position: { x: 300, y: 535 },
   },
   {
-    id: 'shiftLeft',
+    id: "shiftLeft",
     data: {
-      label: 'Shift Left 1',
+      label: "Shift Left 1",
     },
     style: {
       width: 90, // Initial width of the node
@@ -142,9 +142,9 @@ const nodes: Node[] = [
   },
 
   {
-    id: 'exNodeIdexBuffer',
+    id: "exNodeIdexBuffer",
     data: {
-      label: 'EX',
+      label: "EX",
     },
     style: {
       border: "1px solid #48BB78",
@@ -157,9 +157,9 @@ const nodes: Node[] = [
     position: { x: 500, y: 30 },
   },
   {
-    id: 'mNodeIdexBuffer',
+    id: "mNodeIdexBuffer",
     data: {
-      label: 'M',
+      label: "M",
     },
     style: {
       border: "1px solid #48BB78",
@@ -172,9 +172,10 @@ const nodes: Node[] = [
     position: { x: 500, y: 0 },
   },
   {
-    id: 'wbNodeIdexBuffer',
+    id: "wbNodeIdexBuffer",
+    type: "bufferregs",
     data: {
-      label: 'WB',
+      label: "WB",
     },
     style: {
       border: "1px solid #48BB78",
@@ -187,9 +188,9 @@ const nodes: Node[] = [
     position: { x: 500, y: -30 },
   },
   {
-    id: 'mNodeExmemBuffer',
+    id: "mNodeExmemBuffer",
     data: {
-      label: 'M',
+      label: "M",
     },
     style: {
       border: "1px solid #805AD5",
@@ -202,9 +203,9 @@ const nodes: Node[] = [
     position: { x: 1000, y: 70 },
   },
   {
-    id: 'wbNodeExmemBuffer',
+    id: "wbNodeExmemBuffer",
     data: {
-      label: 'WB',
+      label: "WB",
     },
     style: {
       border: "1px solid #805AD5",
@@ -217,9 +218,9 @@ const nodes: Node[] = [
     position: { x: 1000, y: 40 },
   },
   {
-    id: 'wbNodeMemwbBuffer',
+    id: "wbNodeMemwbBuffer",
     data: {
-      label: 'WB',
+      label: "WB",
     },
     style: {
       border: "1px solid #E53E3E",
@@ -306,7 +307,6 @@ const edges: Edge[] = [
     data: {
       offsetx: 50,
     },
-    
   },
   {
     id: "e2-2",
@@ -384,7 +384,6 @@ const edges: Edge[] = [
     target: "idex",
     sourceHandle: "1",
     targetHandle: "input6",
-    
   },
   {
     id: "e2-10",
@@ -412,8 +411,8 @@ const edges: Edge[] = [
     targetHandle: "input1",
     type: "horizontal",
     data: {
-      offsetx: 50
-    }
+      offsetx: 50,
+    },
   },
   {
     id: "e3-3",
@@ -431,7 +430,7 @@ const edges: Edge[] = [
     type: "horizontal",
     data: {
       offsetx: 50,
-    }
+    },
   },
   {
     id: "e3-5",
@@ -442,7 +441,7 @@ const edges: Edge[] = [
     type: "horizontal",
     data: {
       offsetx: 120,
-    }
+    },
   },
   {
     id: "e3-6",
@@ -452,8 +451,8 @@ const edges: Edge[] = [
     targetHandle: "1",
     type: "horizontal",
     data: {
-      offsetx: 80
-    }
+      offsetx: 80,
+    },
   },
   {
     id: "e3-7",
@@ -484,8 +483,8 @@ const edges: Edge[] = [
     targetHandle: "input4",
     type: "horizontal",
     data: {
-      offsetx: 30
-    }
+      offsetx: 30,
+    },
   },
   {
     id: "e3-11",
@@ -502,9 +501,9 @@ const edges: Edge[] = [
     targetHandle: "1",
     type: "horizontal",
     data: {
-      offsetx: 30
+      offsetx: 30,
     },
-    style: { stroke: '#4299e1a6' }
+    style: { stroke: "#4299e1a6" },
   },
   {
     id: "e3-13",
@@ -512,7 +511,7 @@ const edges: Edge[] = [
     target: "alu",
     sourceHandle: "1",
     targetHandle: "selector",
-    style: { stroke: '#4299e1a6' }
+    style: { stroke: "#4299e1a6" },
   },
   {
     id: "e3-14",
@@ -523,7 +522,7 @@ const edges: Edge[] = [
     type: "horizontal",
     data: {
       offsetx: 15,
-    }
+    },
   },
   {
     id: "e3-14",
@@ -532,8 +531,8 @@ const edges: Edge[] = [
     sourceHandle: "zero",
     targetHandle: "zero",
     style: {
-      stroke: '#4299e1a6'
-    }
+      stroke: "#4299e1a6",
+    },
   },
   {
     id: "e4-1",
@@ -556,8 +555,8 @@ const edges: Edge[] = [
     targetHandle: "address",
     type: "horizontal",
     data: {
-      offsetx: 50
-    }
+      offsetx: 50,
+    },
   },
   {
     id: "e4-3",
@@ -596,8 +595,8 @@ const edges: Edge[] = [
     targetHandle: "input1",
     type: "horizontal",
     data: {
-      offsetx: 100
-    }
+      offsetx: 100,
+    },
   },
   {
     id: "e5-2",
@@ -640,9 +639,9 @@ const edges: Edge[] = [
     targetHandle: "1",
     type: "horizontal",
     data: {
-      offsetx: 30
+      offsetx: 30,
     },
-    style: { stroke: '#4299e1a6' }
+    style: { stroke: "#4299e1a6" },
   },
   {
     id: "c2",
@@ -652,9 +651,9 @@ const edges: Edge[] = [
     targetHandle: "1",
     type: "horizontal",
     data: {
-      offsetx: 30
+      offsetx: 30,
     },
-    style: { stroke: '#4299e1a6' }
+    style: { stroke: "#4299e1a6" },
   },
   {
     id: "c3",
@@ -664,9 +663,9 @@ const edges: Edge[] = [
     targetHandle: "1",
     type: "horizontal",
     data: {
-      offsetx: 30
+      offsetx: 30,
     },
-    style: { stroke: '#4299e1a6' }
+    style: { stroke: "#4299e1a6" },
   },
   {
     id: "c4",
@@ -676,9 +675,9 @@ const edges: Edge[] = [
     targetHandle: "1",
     type: "horizontal",
     data: {
-      offsetx: 400
+      offsetx: 400,
     },
-    style: { stroke: '#4299e1a6' }
+    style: { stroke: "#4299e1a6" },
   },
   {
     id: "c5",
@@ -688,9 +687,9 @@ const edges: Edge[] = [
     targetHandle: "1",
     type: "horizontal",
     data: {
-      offsetx: 430
+      offsetx: 430,
     },
-    style: { stroke: '#4299e1a6' }
+    style: { stroke: "#4299e1a6" },
   },
   {
     id: "c6",
@@ -700,9 +699,9 @@ const edges: Edge[] = [
     targetHandle: "1",
     type: "horizontal",
     data: {
-      offsetx: 250
+      offsetx: 250,
     },
-    style: { stroke: '#4299e1a6' }
+    style: { stroke: "#4299e1a6" },
   },
   {
     id: "c7",
@@ -715,7 +714,7 @@ const edges: Edge[] = [
       offsetx: 70,
       offsety: -400,
     },
-    style: { stroke: '#4299e1a6' }
+    style: { stroke: "#4299e1a6" },
   },
   {
     id: "c8",
@@ -727,7 +726,7 @@ const edges: Edge[] = [
     data: {
       offsetx: 60,
     },
-    style: { stroke: '#4299e1a6' }
+    style: { stroke: "#4299e1a6" },
   },
   {
     id: "c9",
@@ -739,7 +738,7 @@ const edges: Edge[] = [
     data: {
       offsetx: 70,
     },
-    style: { stroke: '#4299e1a6' }
+    style: { stroke: "#4299e1a6" },
   },
   {
     id: "c9",
@@ -751,7 +750,7 @@ const edges: Edge[] = [
     data: {
       offsetx: 70,
     },
-    style: { stroke: '#4299e1a6' }
+    style: { stroke: "#4299e1a6" },
   },
   {
     id: "c10",
@@ -759,7 +758,7 @@ const edges: Edge[] = [
     target: "dataMemory",
     sourceHandle: "1",
     targetHandle: "memRead",
-    style: { stroke: '#4299e1a6' }
+    style: { stroke: "#4299e1a6" },
   },
   {
     id: "c11",
@@ -771,7 +770,7 @@ const edges: Edge[] = [
     data: {
       offsetx: 40,
     },
-    style: { stroke: '#4299e1a6' }
+    style: { stroke: "#4299e1a6" },
   },
   {
     id: "c12",
@@ -783,7 +782,7 @@ const edges: Edge[] = [
     data: {
       offsetx: 10,
     },
-    style: { stroke: '#4299e1a6' }
+    style: { stroke: "#4299e1a6" },
   },
   {
     id: "c13",
@@ -795,7 +794,7 @@ const edges: Edge[] = [
     data: {
       offsetx: 20,
     },
-    style: { stroke: '#4299e1a6' }
+    style: { stroke: "#4299e1a6" },
   },
   {
     id: "c14",
@@ -808,7 +807,7 @@ const edges: Edge[] = [
       offsetx: 50,
       offsety: -200,
     },
-    style: { stroke: '#4299e1a6' }
+    style: { stroke: "#4299e1a6" },
   },
 ];
 
