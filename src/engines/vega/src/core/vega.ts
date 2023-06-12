@@ -129,10 +129,10 @@ export default class Vega {
 
     let B = 0;
 
-    if ((pipe.cumeta?.ALUsrc ?? 0) == 0) {
+    if (pipe.cumeta?.ALUsrc == 0) {
       B = pipe.cpumeta?.rs2Value ?? 0;
     } else {
-      B = pipe.cpumeta.inmm ?? 0;
+      B = pipe.imeta.inmm ?? 0;
     }
 
     const ALUOut = this.alu.next({
@@ -141,7 +141,7 @@ export default class Vega {
       op: aluCtrl ?? 0,
     });
 
-    const jumpDir = (pipe.cpumeta?.pc ?? 0) + (pipe.cpumeta.inmm ?? 0) * 2;
+    const jumpDir = (pipe.cpumeta?.pc ?? 0) + (pipe.imeta.inmm ?? 0) * 2;
 
     this.manager.setState((state) => ({
       pipeline: {
