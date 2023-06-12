@@ -8,6 +8,11 @@ const secondInputStyle = { top: 95, left: 0 };
 const outputStyle = { right: 0 };
 
 export default function Adder() {
+
+  function handleClick() {
+    console.log("Holaa")
+  }
+
   return (
     <ValuePopover value="0x00000000">
       <Box
