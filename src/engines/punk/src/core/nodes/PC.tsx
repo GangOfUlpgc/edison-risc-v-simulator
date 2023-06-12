@@ -11,11 +11,11 @@ import ValuePopover from "../components/ValuePopover";
 import { rv32i } from "../../../../../cpus/riscv-rv32i";
 
 export default function PC() {
-  const pc = rv32i.useMem((state) => state.pc);
+  const pc = rv32i.useState((state) => state.pipeline.IF.cpumeta.pc);
 
   return (
     <ValuePopover
-      value={"0x" + pc.toString(16).padStart(8, "0")}
+      value={"0x" + (pc ?? "0").toString(16).padStart(8, "0")}
       placement="right"
     >
       <Box

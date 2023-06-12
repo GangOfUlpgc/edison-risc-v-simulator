@@ -15,10 +15,10 @@ export default function BufferRegs({ data }: NodeProps) {
       h="30px"
     >
       <Text>{data["label"]}</Text>
-      <ValuePopover value="0x00000000" placement="left">
-        <Handle type="target" position={Position.Left} />
+      <Handle type="target" position={Position.Left} />
+      <ValuePopover value="0x00000000" placement="right">
+        <Handle type="source" position={Position.Right} />
       </ValuePopover>
-      <Handle type="source" position={Position.Right} />
     </Box>
   );
 }
