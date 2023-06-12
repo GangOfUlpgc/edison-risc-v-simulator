@@ -526,7 +526,7 @@ const edges: Edge[] = [
     }
   },
   {
-    id: "e3-14",
+    id: "e3-15",
     source: "alu",
     target: "exmem",
     sourceHandle: "zero",
@@ -742,7 +742,7 @@ const edges: Edge[] = [
     style: { stroke: '#4299e1a6' }
   },
   {
-    id: "c9",
+    id: "c10",
     source: "exNodeIdexBuffer",
     target: "aluControl",
     sourceHandle: "1",
@@ -754,7 +754,7 @@ const edges: Edge[] = [
     style: { stroke: '#4299e1a6' }
   },
   {
-    id: "c10",
+    id: "c11",
     source: "mNodeExmemBuffer",
     target: "dataMemory",
     sourceHandle: "1",
@@ -762,7 +762,7 @@ const edges: Edge[] = [
     style: { stroke: '#4299e1a6' }
   },
   {
-    id: "c11",
+    id: "c12",
     source: "mNodeExmemBuffer",
     target: "dataMemory",
     sourceHandle: "1",
@@ -774,7 +774,7 @@ const edges: Edge[] = [
     style: { stroke: '#4299e1a6' }
   },
   {
-    id: "c12",
+    id: "c13",
     source: "mNodeExmemBuffer",
     target: "branch",
     sourceHandle: "1",
@@ -786,7 +786,7 @@ const edges: Edge[] = [
     style: { stroke: '#4299e1a6' }
   },
   {
-    id: "c13",
+    id: "c14",
     source: "exmem",
     target: "branch",
     sourceHandle: "zero",
@@ -798,7 +798,7 @@ const edges: Edge[] = [
     style: { stroke: '#4299e1a6' }
   },
   {
-    id: "c14",
+    id: "c15",
     source: "branch",
     target: "muxPc",
     sourceHandle: "output",

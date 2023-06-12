@@ -7,12 +7,18 @@ const secondInputStyle = { top: 95, left: 0 };
 const outputStyle = { right: 0 };
 
 export default function Adder() {
+
+  function handleClick() {
+    console.log("Holaa")
+  }
+
   return (
     <Box
       backgroundColor="gray.200"
       px="2"
       py="10"
       clipPath="polygon(0 0, 100% 29%, 100% 67%, 0 100%, 0% 69%, 24% 48%, 0 29%)"
+      onClick={handleClick}
     >
       <Box padding="2" fontSize="0.8rem" textAlign="center">
         Adder
