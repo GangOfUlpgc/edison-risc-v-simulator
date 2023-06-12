@@ -13,6 +13,7 @@ import riscv32i from "./datapath/riscv32i";
 import { Box } from "@chakra-ui/react";
 import Test from "./core/edges/Test";
 import Horizontal from "./core/edges/Horizontal";
+import SegmentedBar from "./datapath/SegmentedBar";
 
 const edgeTypes = {
   default: StepEdge,
@@ -26,6 +27,7 @@ export default function Punk() {
 
   return (
     <Box width="100%" height="100%">
+      <SegmentedBar />
       <ReactFlow
         minZoom={0.1}
         defaultViewport={{ zoom: 0.5, x: 190, y: 240 }}
