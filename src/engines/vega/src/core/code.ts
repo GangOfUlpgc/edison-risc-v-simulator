@@ -1,4 +1,3 @@
-import { LuHexagon } from "react-icons/lu"
 
 interface CodedInstruction{
     instruct: string
@@ -35,7 +34,7 @@ export function codeInstruction(instruction : string): CodedInstruction{
     const flako = instruction.replace(",", "")
 
     const string_s = flako.split(" ")
-    let resultado = ""
+    const resultado = ""
 
     instructionsFun[string_s[0]](string_s)
 

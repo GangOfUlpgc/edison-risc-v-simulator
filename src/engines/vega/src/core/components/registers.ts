@@ -1,3 +1,4 @@
+import { regs } from "@vega/types/mem";
 import { CPUMem } from "../storage/mem";
 
 interface RegisterNext {
@@ -14,9 +15,10 @@ export class RegisterBank {
   }
 
   write(addr: number, value: number) {
-    /*@ts-ignore*/
     CPUMem.setState((state) => ({
-      registers: state.registers.map((v, i) => (i === addr ? value : v)),
+      registers: state.registers.map((v, i) =>
+        i === addr ? value : v
+      ) as regs,
     }));
   }
 

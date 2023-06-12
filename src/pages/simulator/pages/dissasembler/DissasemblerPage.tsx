@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { rv32i } from "../../../../cpus/riscv-rv32i";
-import { As, Box, Grid, GridItem } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import Header from "./components/Header";
 import DisasemblerCard from "./components/DisasemblerCard";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -46,7 +46,7 @@ export default function DissasemblerPage() {
           hasMore={true}
           loader={<h4>Loading...</h4>}
         >
-          {items.map((item, index) => (
+          {items.map((_, index) => (
             <DisasemblerCard
               key={index}
               address={index * 4}

@@ -1,7 +1,5 @@
 import { Box } from '@chakra-ui/react'
 import React from 'react'
-import RegistersCard from './RegistersCard'
-import MemoryCard from './MemoryCard'
 import { useUI } from '../../../../../storage/ui.storage'
 
 

@@ -1,10 +1,45 @@
-import { EncodedInstruction, EncodedInstructionMeta } from "./assambler";
+import { EncodedInstructionMeta } from "./assambler";
 
 export type Address = number;
 
 export type Memory = {
   [address: number]: number;
 };
+
+export type regs = [
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number,
+  number
+];
 
 export interface MemState {
   pc: number;
