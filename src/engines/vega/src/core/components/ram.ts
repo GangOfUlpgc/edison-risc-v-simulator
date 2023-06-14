@@ -15,6 +15,7 @@ export class RAM {
 
   write(addr: number, value: number) {
     if (addr % 4 !== 0) throw new Error(`Invalid register address: ${addr}`);
+    console.log(addr);
     CPUMem.setState((state) => ({
       ram: {
         ...state.ram,
