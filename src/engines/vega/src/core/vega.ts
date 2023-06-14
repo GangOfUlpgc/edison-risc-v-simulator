@@ -168,7 +168,7 @@ export default class Vega {
     }
 
     if (pipe.cumeta?.MemWrite) {
-      this.ram.write(pipe.cpumeta.ALUOut ?? 0, pipe.cpumeta.rs2Value ?? 0);
+      this.ram.write(pipe.cpumeta?.ALUOut ?? 0, pipe.cpumeta.rs2Value ?? 0);
     }
 
     this.manager.setState((state) => ({

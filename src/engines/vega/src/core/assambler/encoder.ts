@@ -47,7 +47,7 @@ const instructionsFun: { [instruction: string]: (load: string[]) => any } = {
   beq: sbtype,
   default: rtype,
   lw: itype,
-  sw: itype,
+  sw: stype,
   and: rtype,
   or: rtype,
 };
@@ -58,16 +58,16 @@ export class Encoder {
 
     const string_s = flako.split(" ");
 
-    let resul: any = [null, null];
+    let resul: any = [0, 0];
 
     resul = instructionsFun[string_s[0]](string_s);
 
-    console.log("El inmediato que se va a poner es: " + resul[1][4])
+    console.log("El inmediato que se va a poner es: " + resul[1][4]);
 
     return {
       instruction: instruction,
       hex: resul[0],
-      bin: parseInt(resul[0], 2),//.toString(16),
+      bin: parseInt(resul[0], 2), //.toString(16),
       meta: {
         type: resul[1][0],
         rs: parseInt(resul[1][1], 2),
@@ -82,12 +82,12 @@ export class Encoder {
 }
 
 function itype(load: string[]) {
-  let inmediato : any= parseInt(load[2].substring(0, load[2].indexOf("(")));
-  let inmediato_sin_cambios = inmediato
-  if(inmediato <= 0) {
-    let inmediatoprueba = inmediato
-    inmediato = ""
-    inmediatoprueba=Math.abs(inmediatoprueba)
+  let inmediato: any = parseInt(load[2].substring(0, load[2].indexOf("(")));
+  let inmediato_sin_cambios = inmediato;
+  if (inmediato < 0) {
+    let inmediatoprueba = inmediato;
+    inmediato = "";
+    inmediatoprueba = Math.abs(inmediatoprueba);
     inmediatoprueba = inmediatoprueba.toString(2);
     inmediatoprueba = inmediatoprueba.padStart(12, "0");
     for (let i = 0; i < inmediatoprueba.length; i++) {
@@ -95,7 +95,7 @@ function itype(load: string[]) {
       let invertido = bit ^ 1;
       inmediato += invertido;
     }
-    inmediato = sumaBinaria(inmediato, "1")
+    inmediato = sumaBinaria(inmediato, "1");
   } else {
     inmediato = inmediato.toString(2);
     inmediato = inmediato.padStart(12, "0");
@@ -110,17 +110,17 @@ function itype(load: string[]) {
   const fun3 = funCode[load[0]];
   const opcode = opCode[load[0]];
   const result = inmediato + r1 + fun3 + rd + opcode;
-  const result2 = [load[0], r1, null, rd, inmediato_sin_cambios, fun3];
+  const result2 = [load[0], r1, 0, rd, inmediato_sin_cambios, fun3];
   return [result, result2];
 }
 
 function stype(save: string[]) {
-  let inmediato : any = parseInt(save[2].substring(0, save[2].indexOf("(")));
-  let inmediato_sin_cambios = inmediato
-  if(inmediato <= 0) {
-    inmediato = ""
-    let inmediatoprueba = inmediato
-    inmediatoprueba = Math.abs(inmediatoprueba)
+  let inmediato: any = parseInt(save[2].substring(0, save[2].indexOf("(")));
+  let inmediato_sin_cambios = inmediato;
+  if (inmediato < 0) {
+    inmediato = "";
+    let inmediatoprueba = inmediato;
+    inmediatoprueba = Math.abs(inmediatoprueba);
     inmediatoprueba = inmediatoprueba.toString(2);
     inmediatoprueba = inmediatoprueba.padStart(12, "0");
     for (let i = 0; i < inmediatoprueba.length; i++) {
@@ -128,7 +128,7 @@ function stype(save: string[]) {
       let invertido = bit ^ 1;
       inmediato += invertido;
     }
-    inmediato = sumaBinaria(inmediato, "1")
+    inmediato = sumaBinaria(inmediato, "1");
   } else {
     inmediato = inmediato.toString(2);
     inmediato = inmediato.padStart(12, "0");
@@ -148,17 +148,17 @@ function stype(save: string[]) {
     fun3 +
     inmediato.substring(6) +
     opcode;
-  const result2 = [save[0], r1, r2, null, inmediato_sin_cambios, fun3];
+  const result2 = [save[0], r1, r2, r2, inmediato_sin_cambios, fun3];
   return [result, result2];
 }
 
 function sbtype(branch: string[]) {
-  let inmediato : any = parseInt(branch[3]);
-  let inmediato_sin_cambios = inmediato
-  if(inmediato <= 0) {
-    let inmediatoprueba = inmediato
-    inmediato = ""
-    inmediatoprueba=Math.abs(inmediatoprueba)
+  let inmediato: any = parseInt(branch[3]);
+  let inmediato_sin_cambios = inmediato;
+  if (inmediato < 0) {
+    let inmediatoprueba = inmediato;
+    inmediato = "";
+    inmediatoprueba = Math.abs(inmediatoprueba);
     inmediatoprueba = inmediatoprueba.toString(2);
     inmediatoprueba = inmediatoprueba.padStart(12, "0");
     for (let i = 0; i < inmediatoprueba.length; i++) {
@@ -166,12 +166,11 @@ function sbtype(branch: string[]) {
       let invertido = bit ^ 1;
       inmediato += invertido;
     }
-    inmediato = sumaBinaria(inmediato, "1")
+    inmediato = sumaBinaria(inmediato, "1");
   } else {
     inmediato = inmediato.toString(2);
     inmediato = inmediato.padStart(12, "0");
   }
-  
 
   let r1 = branch[1].replace("x", "");
   r1 = parseInt(r1, 10).toString(2);
@@ -192,7 +191,7 @@ function sbtype(branch: string[]) {
     inmediato.substring(7, 11) +
     inmediato[1] +
     opcode;
-  const result2 = [branch[0], r1, r2, null,inmediato_sin_cambios, fun3];
+  const result2 = [branch[0], r1, r2, 0, inmediato_sin_cambios, fun3];
   return [result, result2];
 }
 
@@ -217,34 +216,34 @@ function rtype(registros: string[]) {
   }
 
   const result = codigo + r2 + r1 + fun3 + rd + opcode;
-  const result2 = [registros[0], r1, r2, rd, null, fun3];
+  const result2 = [registros[0], r1, r2, rd, 0, fun3];
   return [result, result2];
 }
 
-function sumaBinaria(binario : string, incremento : string) {
+function sumaBinaria(binario: string, incremento: string) {
   while (incremento.length < binario.length) {
     incremento = "0" + incremento;
   }
-  
+
   let resultado = "";
   let acarreo = 0;
-  
+
   // Realizar la suma binaria teniendo en cuenta el acarreo
   for (let i = binario.length - 1; i >= 0; i--) {
     let bit1 = parseInt(binario[i]);
     let bit2 = parseInt(incremento[i]);
-  
+
     let suma = bit1 + bit2 + acarreo;
-  
+
     let bitResultado = suma % 2;
     acarreo = Math.floor(suma / 2);
-  
+
     resultado = bitResultado.toString() + resultado;
   }
-  
+
   if (acarreo > 0) {
     resultado = acarreo.toString() + resultado;
   }
-  
-  return resultado
-} 
+
+  return resultado;
+}
