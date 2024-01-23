@@ -132,8 +132,4 @@ If you find this project useful, please consider supporting it by starring the r
 
 For more information, support, or to discuss Edison and the Vega engine with other users and developers, please join our Discord server or subscribe to our mailing list.
 
-## Contact
-
-For further inquiries or if you need help, feel free to contact the maintainers via email at [edison-support@example.com](mailto:edison-support@example.com).
-
-Enjoy coding with Edison and exploring the RISC-V architecture!
+#### Enjoy coding with Edison and exploring the RISC-V architecture!
